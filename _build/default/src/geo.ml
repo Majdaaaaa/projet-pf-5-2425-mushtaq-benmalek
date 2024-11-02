@@ -62,5 +62,31 @@ let corners (r :rectangle) : point list =
 in s_1::s_2::s_3::s_4::[]
 ;;
   
+let compare_x (p1 : point) (p2 : point) : int =
+  if p1.x = p2.x then 0 
+  else if p1.x > p2.x then 1
+  else -1
+;;
+
+let sort_x (l : point list) : point list = 
+  List.sort compare_x l
+;;
+
+let compare_y (p1 : point) (p2 : point) : int =
+  if p1.y = p2.y then 0 
+  else if p1.y > p2.y then 1
+  else -1
+;;
+
+let sort_y (l : point list) : point list = 
+  List.sort compare_y l
+;;
+
 let rectangle_of_list (pl : point list) : rectangle = 
-  failwith "À compléter"
+  match pl with 
+  [] -> {x_min=0.0; x_max=0.0; y_min=0.0; y_max=0.0}
+  |[a] ->  {x_min=a.x; x_max=a.x; y_min=a.y; y_max=a.y}
+  |_::_ -> 
+    let l_y = sort_y pl and l_x = sort_x pl and l_length = List.length pl in 
+    {x_min= (List.nth l_x 0).x; x_max=(List.nth l_x (l_length-1)).x; y_min=(List.nth l_y 0).y ; y_max= (List.nth l_y (l_length-1)).y}
+;;
