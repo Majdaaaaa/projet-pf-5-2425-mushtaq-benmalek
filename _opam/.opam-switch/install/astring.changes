@@ -1,0 +1,31 @@
+opam-version: "2.0"
+added: [
+  "doc/astring" {"D"}
+  "doc/astring/CHANGES.md" {"F:S934T1730558419."}
+  "doc/astring/LICENSE.md" {"F:S741T1730558419."}
+  "doc/astring/README.md" {"F:S1345T1730558419."}
+  "doc/astring/examples.ml" {"F:S2980T1730558419."}
+  "lib/astring" {"D"}
+  "lib/astring/META" {"F:S461T1730558419."}
+  "lib/astring/astring.a" {"F:S240880T1730558419."}
+  "lib/astring/astring.cma" {"F:S418918T1730558419."}
+  "lib/astring/astring.cmi" {"F:S40891T1730558419."}
+  "lib/astring/astring.cmti" {"F:S260587T1730558419."}
+  "lib/astring/astring.cmx" {"F:S30771T1730558419."}
+  "lib/astring/astring.cmxa" {"F:S5883T1730558419."}
+  "lib/astring/astring.cmxs" {"F:S240960T1730558419."}
+  "lib/astring/astring.mli" {"F:S52930T1730558419."}
+  "lib/astring/astring_base.cmx" {"F:S2106T1730558419."}
+  "lib/astring/astring_char.cmx" {"F:S3190T1730558419."}
+  "lib/astring/astring_escape.cmx" {"F:S1628T1730558419."}
+  "lib/astring/astring_string.cmx" {"F:S20939T1730558419."}
+  "lib/astring/astring_sub.cmx" {"F:S13675T1730558419."}
+  "lib/astring/astring_top.a" {"F:S2520T1730558419."}
+  "lib/astring/astring_top.cma" {"F:S3345T1730558419."}
+  "lib/astring/astring_top.cmx" {"F:S1335T1730558419."}
+  "lib/astring/astring_top.cmxa" {"F:S1341T1730558419."}
+  "lib/astring/astring_top.cmxs" {"F:S51040T1730558419."}
+  "lib/astring/astring_top_init.ml" {"F:S1424T1730558419."}
+  "lib/astring/astring_unsafe.cmx" {"F:S1174T1730558419."}
+  "lib/astring/opam" {"F:S1269T1730558419."}
+]

@@ -1,0 +1,19 @@
+opam-version: "2.0"
+added: [
+  "bin/utftrip" {"F:S1812720T1730558418."}
+  "doc/uutf" {"D"}
+  "doc/uutf/CHANGES.md" {"F:S1994T1730558418."}
+  "doc/uutf/LICENSE.md" {"F:S738T1730558418."}
+  "doc/uutf/README.md" {"F:S1711T1730558418."}
+  "lib/uutf" {"D"}
+  "lib/uutf/META" {"F:S207T1730558418."}
+  "lib/uutf/opam" {"F:S1528T1730558418."}
+  "lib/uutf/uutf.a" {"F:S82896T1730558418."}
+  "lib/uutf/uutf.cma" {"F:S156583T1730558418."}
+  "lib/uutf/uutf.cmi" {"F:S6725T1730558418."}
+  "lib/uutf/uutf.cmti" {"F:S69219T1730558418."}
+  "lib/uutf/uutf.cmx" {"F:S8479T1730558418."}
+  "lib/uutf/uutf.cmxa" {"F:S762T1730558418."}
+  "lib/uutf/uutf.cmxs" {"F:S127224T1730558418."}
+  "lib/uutf/uutf.mli" {"F:S21863T1730558418."}
+]

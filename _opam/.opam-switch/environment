@@ -1,0 +1,6 @@
+OPAM_SWITCH_PREFIX	=	/Users/majda/Desktop/projet-pf-5-2425-mushtaq-benmalek/_opam	:	target	Prefix\ of\ the\ current\ opam\ switch
+CAML_LD_LIBRARY_PATH	=	/Users/majda/Desktop/projet-pf-5-2425-mushtaq-benmalek/_opam/lib/stublibs	:	target	Updated\ by\ package\ ocaml-base-compiler
+CAML_LD_LIBRARY_PATH	=	/Users/majda/Desktop/projet-pf-5-2425-mushtaq-benmalek/_opam/lib/ocaml/stublibs:/Users/majda/Desktop/projet-pf-5-2425-mushtaq-benmalek/_opam/lib/ocaml	:	target	Updated\ by\ package\ ocaml
+CAML_LD_LIBRARY_PATH	+=	/Users/majda/Desktop/projet-pf-5-2425-mushtaq-benmalek/_opam/lib/stublibs	:	target	Updated\ by\ package\ ocaml
+OCAML_TOPLEVEL_PATH	=	/Users/majda/Desktop/projet-pf-5-2425-mushtaq-benmalek/_opam/lib/toplevel	Updated\ by\ package\ ocaml
+PATH	=+=	/Users/majda/Desktop/projet-pf-5-2425-mushtaq-benmalek/_opam/bin	:	target	Binary\ dir\ for\ opam\ switch\ /Users/majda/Desktop/projet-pf-5-2425-mushtaq-benmalek
