@@ -82,4 +82,6 @@ let rec over_approximate (prog : program) (r : rectangle) : rectangle =
   failwith "À compléter"
 
 let feasible_target_reached (prog : program) (r : rectangle) (target : rectangle) : bool =
-  failwith "À compléter"
+  let approx = over_approximate prog r in 
+    inclusion approx target 
+;;
