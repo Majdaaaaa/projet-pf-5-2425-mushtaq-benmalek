@@ -62,7 +62,21 @@ let target_reached_rect (prog : program) (r : rectangle) (target : rectangle) : 
 ;;
 
 let run_polymorphe (transform : transformation -> 'a -> 'a) (prog : program) (i : 'a) : 'a list =
-  failwith "À compléter"
+  let rec aux prog i =
+    match prog with
+    | [] -> []
+    | pr :: rest -> match pr with 
+      | Move t ->
+        let new_state = transform t i in
+          new_state :: aux rest new_state
+      | Repeat (n, sub_prog)  ->
+        let unfolded_prog = unfold_repeat [Repeat (n, sub_prog)] in
+          aux (unfolded_prog @ rest) i
+    | Either (p1, p2)  ->
+        let chosen_prog = if Random.bool() then p1 else p2 in
+          aux (chosen_prog @ rest) i 
+    in i :: aux prog i 
+;;
 
 let rec over_approximate (prog : program) (r : rectangle) : rectangle =
   failwith "À compléter"
