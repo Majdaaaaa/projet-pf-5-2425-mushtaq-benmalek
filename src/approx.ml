@@ -79,7 +79,35 @@ let run_polymorphe (transform : transformation -> 'a -> 'a) (prog : program) (i 
 ;;
 
 let rec over_approximate (prog : program) (r : rectangle) : rectangle =
-  failwith "À compléter"
+  match prog with
+  | [] -> r
+  | a::w -> match a with
+           | Move t -> let new_rect = transform_rect t r in over_approximate w new_rect
+           | Repeat _ -> let new_prog = unfold_repeat prog in over_approximate new_prog r
+           | Either (p,q) -> 
+            
+            let new_rect_p_List = run_rect p r in
+            let new_rect_p = List.nth new_rect_p_List ((List.length new_rect_p_List)-1) in
+            let new_p_corner = corners new_rect_p in
+            
+            let new_rect_q_List = run_rect q r in
+            let new_rect_q = List.nth new_rect_q_List ((List.length new_rect_q_List)-1) in
+            let new_q_corner = corners new_rect_q in
+            
+            let p_min = List.nth new_p_corner 0 in
+            let p_max = List.nth new_p_corner 3 in
+            let q_min = List.nth new_q_corner 0 in
+            let q_max = List.nth new_q_corner 3 in
+            
+            let res_min_x = if p_min.x < q_min.x then p_min.x else q_min.x in
+            let res_min_y = if p_min.y < q_min.y then p_min.y else  q_min.y in
+            let res_max_x = if p_max.x> q_max.x then p_max.x else q_max.x in
+            let res_max_y = if p_max.y> q_max.y then p_max.y else q_max.y in
+            
+            let res= {x_min=res_min_x;y_min=res_min_y;x_max=res_max_x;y_max=res_max_y} in
+            over_approximate w res
+;;
+ 
 
 let feasible_target_reached (prog : program) (r : rectangle) (target : rectangle) : bool =
   let approx = over_approximate prog r in 
