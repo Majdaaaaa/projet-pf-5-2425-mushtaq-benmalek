@@ -93,6 +93,14 @@ let run (prog : program) (p : point) : point list =
       | Move t -> List.map (fun p -> Move t :: p) (all_choices r) (* ajouter Move t a chaque branche du programme *)
 ;;
 
-let target_reached (prog : program) (p : point) (r : rectangle) : bool =
-  
+let  target_reached (prog : program) (p : point) (r : rectangle) : bool =
+  let c_l = all_choices prog in 
+  let rec aux c_l p r =
+    match c_l with 
+    [] -> false
+    |[pr] -> let l = run pr p in 
+      in_rectangle r (List.nth l ((List.length l)-1))
+    |pr :: rest -> 
+      aux [pr] p r && aux rest p r
+  in aux c_l p r
 ;;
