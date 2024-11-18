@@ -1,7 +1,0 @@
-{
-    "git.ignoreLimitWarning": true,
-    "ocaml.sandbox": {
-        "kind": "opam",
-        "switch": "${workspaceFolder:projet-pf-5-2425-mushtaq-benmalek}"
-    }
-}
