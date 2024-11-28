@@ -1,4 +1,5 @@
 open Graphics;;
+open Format;;
 
 open_graph " 500x500";;
 
@@ -21,6 +22,32 @@ let rec loop t =
     loop t
   end
 
+  (* le nom du fichier compte pour un argmument *)
+
 let () =
+  let nbargs = Array.length Sys.argv in
+  if nbargs < 1 then Printf.printf "Il manque des arguments \n"
+  else
+    let res = [] in
+    for i=0 to nbargs-1 do
+      Sys.argv(i)::res
+    done
+    format_l (List.rev res);
+    try loop 5
+  with Quit -> close_graph ()
+    
+;;
+
+
+
+(* let () =
   try loop 5
-  with Quit -> close_graph ();;
+  with Quit -> close_graph ();; *)
+    
+
+
+
+  (* format_complet Sys.argv.(1) Sys.argv.(2); *)
+    (* if nbargs = 2 then format_complet Sys.argv.(1)
+    else format_complet  Sys.argv.(2); *)
+    (* Printf.printf "Il y a %d arguments \n" nbargs; *)
