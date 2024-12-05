@@ -1,4 +1,5 @@
 (executable
 	(public_name interp)
+	(modules cr interp repere)
 	(libraries graphics pf5)
-	(modules repere interp))
+)
