@@ -28,11 +28,15 @@ let () =
   let nbargs = Array.length Sys.argv in
   if nbargs < 1 then Printf.printf "Il manque des arguments \n"
   else
-    let res = [] in
+    (* format_complet Sys.argv(1) Sys.argv(2) Sys.argv(3); *)
+    (* format_option Sys.argv(1); *)
+    (* let res = [] in
     for i=0 to nbargs-1 do
       Sys.argv(i)::res
-    done
-    format_l (List.rev res);
+    done *)
+    (* format_l (List.rev res); *)
+  
+  Arg.parse speclist anon_fun usage_msg;
     try loop 5
   with Quit -> close_graph ()
     
