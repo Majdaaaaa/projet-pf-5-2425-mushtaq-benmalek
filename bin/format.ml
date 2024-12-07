@@ -91,9 +91,10 @@
    ] *)
 
 (* open Graph *)
-open Graphics
-open Pf5.Geo
-open Pf5.Interp
+open Graphics;;
+(* open Graph;; *)
+open Pf5.Geo;;
+open Pf5.Interp;;
 
 let tuple_color = Arg.Tuple [
     Arg.Int (fun r -> Printf.printf "Rouge : %d\n" r);
@@ -113,7 +114,9 @@ let tuple_abs = Arg.Tuple[
   ]
 
 
-let prog = 
+(*Le problème est là si on enlève les () ca marche pas, psq on utilise size_x et size_y qui font parti de graphics et Ocaml évalue ça avant 
+D'avoir ouvert la fenêtre ca fais Graphics.graphics_failure ...*)
+let prog () = 
   let mid_x = (float_of_int (size_x ())) /. 2. in 
   let mid_y =  (float_of_int (size_y ())) /. 2. in 
   (*Carré*)
@@ -127,7 +130,7 @@ let prog =
 let speclist = [
   ("-abs",tuple_abs,"Affichage de rectangles et approximation initiale");
   (* ("-cr", Arg.Unit (fun () -> Printf.printf "Vous avez choisi cr\n"), "Affichage de points"); *)
-  ("-cr", Arg.Unit (fun () -> Cr.run prog 1.), "Affichage de points");
+  ("-cr",  Arg.Unit (fun () -> Cr.run (prog () ) 1.), "Affichage de points");
   ("-bc", tuple_color, "Couleur de l'arrière-plan");
   ("-fc", tuple_color, "Couleur de l’avant plan");
   ("-rc", tuple_color, "Couleur du rectangle");
