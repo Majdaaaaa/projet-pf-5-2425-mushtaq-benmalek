@@ -1,6 +1,7 @@
 (library
   (name pf5)
   (public_name pf5)
+  (modules interp approx geo)
   (libraries fmt)
   (flags (:standard -w A-27-39-33-32))
 ) 

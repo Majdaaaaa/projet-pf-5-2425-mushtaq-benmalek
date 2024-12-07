@@ -1,3 +1,5 @@
 (executable
 	(public_name interp)
-	(libraries graphics pf5))
+	(modules cr interp repere format graph)
+	(libraries graphics pf5)
+)

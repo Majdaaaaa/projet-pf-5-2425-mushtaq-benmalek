@@ -90,6 +90,8 @@ else
   ], "Couleur de l'arrière-plan");
 ] *)
 
+open Graph
+
 let tuple_color = Arg.Tuple [
   Arg.Int (fun r -> Printf.printf "Rouge : %d\n" r);
   Arg.Int (fun v -> Printf.printf "Vert : %d\n" v);
@@ -109,7 +111,8 @@ let tuple_abs = Arg.Tuple[
 
 let speclist = [
   ("-abs",tuple_abs,"Affichage de rectangles et approximation initiale");
-  ("-cr", Arg.Unit (fun () -> Printf.printf "Vous avez choisi cr\n"), "Affichage de points");
+  (* ("-cr", Arg.Unit (fun () -> Printf.printf "Vous avez choisi cr\n"), "Affichage de points"); *)
+  ("-cr", Arg.Unit (fun () -> graphe), "Affichage de points");
   ("-bc", tuple_color, "Couleur de l'arrière-plan");
   ("-fc", tuple_color, "Couleur de l’avant plan");
   ("-rc", tuple_color, "Couleur du rectangle");
