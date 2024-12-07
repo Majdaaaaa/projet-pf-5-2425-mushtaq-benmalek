@@ -162,6 +162,7 @@ open Format;;
    with Quit ->
     close_graph ();; *)
 open Graphics;;
+(* open Graph;; *)
 exception Quit;;
 
 let () =
@@ -172,6 +173,7 @@ let () =
     if nbargs < 1 then Printf.printf "Il manque des arguments \n"
     else
       Arg.parse speclist anon_fun usage_msg;
+    Printf.printf "ALOOOOOO\n" ;
     while true do
       let eve = wait_next_event [Key_pressed] in
       if eve.key = 'q' then raise Quit

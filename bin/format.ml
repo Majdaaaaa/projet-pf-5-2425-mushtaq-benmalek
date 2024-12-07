@@ -127,7 +127,7 @@ let prog =
 let speclist = [
   ("-abs",tuple_abs,"Affichage de rectangles et approximation initiale");
   (* ("-cr", Arg.Unit (fun () -> Printf.printf "Vous avez choisi cr\n"), "Affichage de points"); *)
-  ("-cr", Arg.Unit (fun () -> Graph.graphe; Cr.run prog 1.), "Affichage de points");
+  ("-cr", Arg.Unit (fun () -> Cr.run prog 1.), "Affichage de points");
   ("-bc", tuple_color, "Couleur de l'arrière-plan");
   ("-fc", tuple_color, "Couleur de l’avant plan");
   ("-rc", tuple_color, "Couleur du rectangle");
