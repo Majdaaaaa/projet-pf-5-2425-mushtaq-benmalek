@@ -2,7 +2,7 @@ exception Quit;;
 open Graphics;;
 
 let init_graphics () =
-  Printf.printf "Début programme\n";
+  (* Printf.printf "Début programme\n"; *)
   open_graph " 800x600";
   set_window_title "Interpreteur Graphique";
   Repere.repere ();
@@ -18,7 +18,12 @@ let () =
     else 
       init_graphics ();
     Repere.repere ();
+    (
+    try 
     Arg.parse Format.speclist Format.anon_fun Format.usage_msg;
+    with
+      | Arg.Bad s -> Printf.printf "mauvais argument donné %s" s;
+    );
     while true do
       let eve = wait_next_event [Key_pressed] in
       if eve.key = 'q' then raise Quit
