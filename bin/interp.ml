@@ -3,8 +3,8 @@ open Format;;
 
 open_graph " 500x500";;
 
-exception Quit;;
-
+(* exception Quit;; *)
+(* 
 let rec loop t =
   let eve = wait_next_event [Mouse_motion;Key_pressed]
   in
@@ -20,11 +20,11 @@ let rec loop t =
   else begin
     fill_circle (eve.mouse_x-t/2) (eve.mouse_y-t/2) t;
     loop t
-  end
+  end *)
 
   (* le nom du fichier compte pour un argmument *)
 
-let () =
+(* let () =
   let nbargs = Array.length Sys.argv in
   if nbargs < 1 then Printf.printf "Il manque des arguments \n"
   else
@@ -37,11 +37,21 @@ let () =
     (* format_l (List.rev res); *)
   
   Arg.parse speclist anon_fun usage_msg;
-    try loop 5
-  with Quit -> close_graph ()
+    (* try loop 5
+  with Quit -> close_graph () *)
     
-;;
+;; *)
 
+
+(* let () =
+  let nbargs = Array.length Sys.argv in
+  if nbargs < 1 then Printf.printf "Il manque des arguments \n"
+  else
+    try
+      Arg.parse speclist anon_fun usage_msg
+    with 
+   | Arg.Bad msg -> Printf.printf "_____________________________________ %s" msg  
+;; *)
 
 
 (* let () =
@@ -55,3 +65,15 @@ let () =
     (* if nbargs = 2 then format_complet Sys.argv.(1)
     else format_complet  Sys.argv.(2); *)
     (* Printf.printf "Il y a %d arguments \n" nbargs; *)
+
+
+
+
+
+
+let () =
+  let nbargs = Array.length Sys.argv in
+  if nbargs < 1 then Printf.printf "Il manque des arguments \n"
+  else
+      Arg.parse speclist anon_fun usage_msg
+  ;;

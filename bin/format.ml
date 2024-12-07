@@ -80,25 +80,44 @@ else
   ("-size", Arg.Tuple (fun n1 n2 -> Printf.printf "Vous avez choisi pour size "^string_of_int n1^"et "string_of_int n2),"la dimension de la fenêtre en pixels")
 ] *)
 
+
 (* let speclist = [
-  ("-cr",Arg.Unit(fun () -> Printf.printf "Vous avez choisi cr\n"),"Affichage de points");
-  ("-bc", Arg.Tuple [
-    Arg.Int (fun n1 -> Printf.printf "%d" string_of_int n1);
-    Arg.Int (fun n2 -> Printf.printf "%d" string_of_int n2);
-    Arg.Int (fun n3 -> Printf.printf "%d" string_of_int n3);
-  ];"couleur de l’arrière plan")
-] *)
-
-
-let speclist = [
   ("-cr", Arg.Unit (fun () -> Printf.printf "Vous avez choisi cr\n"), "Affichage de points");
   ("-bc", Arg.Tuple [
-    Arg.Int (fun n1 -> Printf.printf "Couleur de l'arrière-plan - rouge: %d\n" n1);
-    Arg.Int (fun n2 -> Printf.printf "Vert: %d\n" n2);
-    Arg.Int (fun n3 -> Printf.printf "Bleu: %d\n" n3);
+    Arg.Int (fun n1 -> Printf.printf "Couleur de l'arrière-plan: \nRouge : %d\n" n1);
+    Arg.Int (fun n2 -> Printf.printf "Vert : %d\n" n2);
+    Arg.Int (fun n3 -> Printf.printf "Bleu : %d\n" n3);
   ], "Couleur de l'arrière-plan");
+] *)
+
+let tuple_color = Arg.Tuple [
+  Arg.Int (fun r -> Printf.printf "Rouge : %d\n" r);
+  Arg.Int (fun v -> Printf.printf "Vert : %d\n" v);
+  Arg.Int (fun b -> Printf.printf "Bleu : %d\n" b);
 ]
 
-let anon_fun  arg = Printf.printf "Ce n'est un argument valide %s  \n" arg
+let tuple_size = Arg.Tuple[
+  Arg.Int (fun w -> Printf.printf "largeur = %d\n" w);
+  Arg.Int(fun h ->Printf.printf "hauteur = %d\n" h)]
+
+let tuple_abs = Arg.Tuple[
+  Arg.Float (fun x_min -> Printf.printf "x_min = %f\n" x_min);
+  Arg.Float (fun y_min -> Printf.printf "y_min = %f\n" y_min);
+  Arg.Float (fun x_max -> Printf.printf "x_max = %f\n" x_max);
+  Arg.Float (fun y_max -> Printf.printf "y_max = %f\n" y_max);
+]
+
+let speclist = [
+  ("-abs",tuple_abs,"Affichage de rectangles et approximation initiale");
+  ("-cr", Arg.Unit (fun () -> Printf.printf "Vous avez choisi cr\n"), "Affichage de points");
+  ("-bc", tuple_color, "Couleur de l'arrière-plan");
+  ("-fc", tuple_color, "Couleur de l’avant plan");
+  ("-rc", tuple_color, "Couleur du rectangle");
+  ("-pc", tuple_color, "Couleur du point");
+  ("-size",tuple_size,"Dimension de la fenêtre en pixels avec W = largeur, H = hauteur");
+  ("-1", Arg.Unit (fun () -> Printf.printf "Vous avez choisi le programme %d\n" 1),"programme à choisir")
+]
+
+let anon_fun arg = Printf.printf "Ce n'est un argument valide %s  \n" arg
 
 let usage_msg = "inter ...  Option disponible :"
