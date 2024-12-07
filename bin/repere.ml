@@ -14,10 +14,10 @@ let repere ()  =
   (*axe Y*)
   moveto (width/2) length;
   lineto (width/2) 0;
-  (* Ordre supérieur *)
+  (*Ordre supérieur = fonction de fonction *)
   (*graduation X*)
   moveto  0 (length/2);
-  
+
   let rec grad_X spixel nbr_grad acc l =
     if acc <= nbr_grad then (
       set_color black; 
