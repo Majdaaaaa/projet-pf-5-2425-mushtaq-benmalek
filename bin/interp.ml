@@ -1,12 +1,6 @@
 exception Quit;;
 open Graphics;;
-
-let init_graphics () =
-  Printf.printf "Début programme\n";
-  open_graph " 800x600";
-  set_window_title "Interpreteur Graphique";
-  Repere.repere ();
-;;
+open_graph " 800x600";;
 
 let () =
   try
@@ -16,9 +10,8 @@ let () =
       raise Quit;
     )
     else 
-      init_graphics ();
-    Repere.repere ();
-    Arg.parse Format.speclist Format.anon_fun Format.usage_msg;
+      Arg.parse Format.speclist Format.anon_fun Format.usage_msg;
+      (* Init.init_graphics (); *)
     while true do
       let eve = wait_next_event [Key_pressed] in
       if eve.key = 'q' then raise Quit

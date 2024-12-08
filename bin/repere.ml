@@ -3,7 +3,6 @@ exception Quit;;
 
 (* Fonction pour dessiner un repère orthonormé *)
 let repere ()  =
-  set_color blue;
   let width = size_x () in
   let length = size_y () in 
 
@@ -20,7 +19,6 @@ let repere ()  =
 
   let rec grad_X spixel nbr_grad acc l =
     if acc <= nbr_grad then (
-      set_color black; 
       moveto  ((width/2) + (spixel*acc)) (l/2 - 5);
       lineto  ((width/2) + (spixel*acc)) (l/2 + 1);
       if acc <> 0 then (
@@ -39,7 +37,6 @@ let repere ()  =
   moveto (width/2) length;
   let rec grad_Y spixel nbr_grad acc w =
     if acc <= nbr_grad then (
-      set_color black;
       moveto (w/2-5) ((length/2)+(spixel*acc)) ;
       lineto  (w/2 + 1) ((length/2) + (spixel*acc)) ;
       if acc <> 0 then (

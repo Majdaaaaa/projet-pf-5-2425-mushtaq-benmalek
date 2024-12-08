@@ -96,6 +96,7 @@ open Graphics;;
 open Pf5.Geo;;
 open Pf5.Interp;;
 
+
 let tuple_color = Arg.Tuple [
     Arg.Int (fun r -> Printf.printf "Rouge : %d\n" r);
     Arg.Int (fun v -> Printf.printf "Vert : %d\n" v);
@@ -115,7 +116,7 @@ let tuple_abs = Arg.Tuple[
 
 
 (*Le problème est là si on enlève les () ca marche pas, psq on utilise size_x et size_y qui font parti de graphics et Ocaml évalue ça avant 
-D'avoir ouvert la fenêtre ca fais Graphics.graphics_failure ...*)
+  D'avoir ouvert la fenêtre ca fais Graphics.graphics_failure ...*)
 let prog () = 
   let mid_x = (float_of_int (size_x ())) /. 2. in 
   let mid_y =  (float_of_int (size_y ())) /. 2. in 
@@ -127,18 +128,75 @@ let prog () =
       ])
   ];;
 
+let bc = 
+  Printf.printf "BC\n";
+  let r = ref 0 in
+  let v = ref 0 in 
+  let b = ref 0 in
+  Arg.Tuple [
+    Arg.Int (fun x -> r := x);
+    Arg.Int (fun x -> v := x);
+    Arg.Int (fun x -> b := x);
+    Arg.Unit (fun () ->
+        let c = rgb !r !v !b in
+        set_color c; (* Explication de pourquoi faut -bc avant -fc 
+                        : set_color change la couleur par défaut des dessins, donc a partir de cette ligne tout dessins sera fait de la couleur c 
+                        Donc si on fait -fc puis -bc les couleurs de l'avant plan de de l'arriére plan seront les mêmes *)
+        clear_graph (); 
+        fill_rect 0 0 (size_x()) (size_y());
+        set_color white;
+      )
+  ] ;;
+
+let fc = 
+  Printf.printf "FC\n";
+  let r = ref 0 in
+  let v = ref 0 in 
+  let b = ref 0 in
+  Arg.Tuple [
+    Arg.Int (fun x -> r := x);
+    Arg.Int (fun x -> v := x);
+    Arg.Int (fun x -> b := x);
+    Arg.Unit (fun () ->
+        let c = rgb !r !v !b in
+        set_color c; (* Change la valeur de Graphics.foreground, tout les dessins a partir de la seront fais de la couleur c *)
+        Init.init_graphics ();
+        set_color black;
+      )
+  ]
+
+let pc = 
+  let r = ref 0 in
+  let v = ref 0 in 
+  let b = ref 0 in
+  Arg.Tuple [
+    Arg.Int (fun x -> r := x);
+    Arg.Int (fun x -> v := x);
+    Arg.Int (fun x -> b := x);
+    Arg.Unit (fun () ->
+        let c = rgb !r !v !b in
+        set_color c;
+      )
+  ];
+;;
+
+
+(* Les options dessins doivent être mis aprés -fc ou -bc  *)
+(* Nouvel ordre a respecté : -bc avant -fc *)
+(* pour testé  dune exec interp -- -bc 205 92 92 -pc 255 255 0 -cr -fc 142 68 173 
+   TODO : Si on change l'ordre ca marche plus correctement !!! *)
 let speclist = [
   ("-abs",tuple_abs,"Affichage de rectangles et approximation initiale");
   (* ("-cr", Arg.Unit (fun () -> Printf.printf "Vous avez choisi cr\n"), "Affichage de points"); *)
-  ("-cr",  Arg.Unit (fun () -> Cr.run (prog () ) 1.), "Affichage de points");
-  ("-bc", tuple_color, "Couleur de l'arrière-plan");
-  ("-fc", tuple_color, "Couleur de l’avant plan");
+  ("-cr",  Arg.Unit (fun () -> Cr.run (prog () ) 1. ), "Affichage de points");
+  ("-bc", bc , "Couleur de l'arrière-plan");
+  ("-fc", fc, "Couleur de l’avant plan");
   ("-rc", tuple_color, "Couleur du rectangle");
-  ("-pc", tuple_color, "Couleur du point");
+  ("-pc", pc, "Couleur du point");
   ("-size",tuple_size,"Dimension de la fenêtre en pixels avec W = largeur, H = hauteur");
   ("-1", Arg.Unit (fun () -> Printf.printf "Vous avez choisi le programme %d\n" 1),"programme à choisir")
 ]
 
 let anon_fun arg = Printf.printf "Ce n'est un argument valide %s  \n" arg
 
-let usage_msg = "inter ...  Option disponible :"
+let usage_msg = "interp ...  Option disponible :"
