@@ -21,6 +21,8 @@ let tuple_abs = Arg.Tuple[
   ]
 
 
+let check_color x = if x > 0 && x < 256 then true else false
+
 (*Le problème est là si on enlève les () ca marche pas, psq on utilise size_x et size_y qui font parti de graphics et Ocaml évalue ça avant 
 D'avoir ouvert la fenêtre ca fais Graphics.graphics_failure ...*)
 let prog () = 
@@ -46,6 +48,67 @@ let speclist = [
   (* ("-1", Arg.Unit (fun () -> Printf.printf "Vous avez choisi le programme %d\n" 1),"programme à choisir") *)
 ]
 
-let anon_fun arg = Printf.printf "Ce n'est un argument valide %s  \n" arg
+
+let anon_fun arg = 
+  match arg with
+  | "1" -> Printf.printf "c'est le programme  un : %s\n" arg
+  | "2" -> Printf.printf "c'est le programme deux : %s\n" arg
+  | "3" -> Printf.printf "c'est le programme trois : %s\n" arg
+  | _ -> close_graph();Printf.printf "c'est quoi ça ? \n"
+
 
 let usage_msg = "inter ...  Option disponible :"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(* let tuple_abs = Arg.Tuple[
+    Arg.Float (fun x_min -> 
+      try
+      Printf.printf "x_min = %f\n" x_min
+      with 
+      | Arg.Bad  s -> Printf.printf "mauvais argument donné %s" s
+    );
+
+    Arg.Float (fun y_min ->
+      try
+      Printf.printf "y_min = %f\n" y_min
+    with 
+    | Arg.Bad  s -> Printf.printf "mauvais argument donné %s" s
+      );
+    Arg.Float (fun x_max -> 
+      try
+      Printf.printf "x_max = %f\n" x_max
+    with 
+    | Arg.Bad  s -> Printf.printf "mauvais argument donné %s" s
+      );
+    Arg.Float (fun y_max -> 
+      try Printf.printf "y_max = %f\n" y_max
+    with 
+    | Arg.Bad  s -> Printf.printf "mauvais argument donné %s" s
+      );
+  ]  *)

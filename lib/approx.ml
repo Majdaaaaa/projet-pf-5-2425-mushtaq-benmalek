@@ -107,7 +107,6 @@ let rec over_approximate (prog : program) (r : rectangle) : rectangle =
             let res= {x_min=res_min_x;y_min=res_min_y;x_max=res_max_x;y_max=res_max_y} in
             over_approximate w res
 ;;
- 
 
 let feasible_target_reached (prog : program) (r : rectangle) (target : rectangle) : bool =
   let approx = over_approximate prog r in 

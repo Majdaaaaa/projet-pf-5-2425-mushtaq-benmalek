@@ -14,16 +14,15 @@ let () =
     if nbargs <= 1 then ( 
       Printf.printf "Il manque des arguments\n";
       raise Quit;
-    )
-    else 
+    ) else 
       init_graphics ();
+    
     Repere.repere ();
-    (
-    try 
-    Arg.parse Format.speclist Format.anon_fun Format.usage_msg;
-    with
-      | Arg.Bad s -> Printf.printf "mauvais argument donné %s" s;
-    );
+    (* try  *)
+      Arg.parse Format.speclist Format.anon_fun Format.usage_msg;
+    (* with *)
+      (* | Arg.Bad s -> Printf.printf "mauvais argument donné %s" s; *)
+      (* | exn -> Printf.printf "Une exception est survenue : %s\n" (Printexc.to_string exn); *)
     while true do
       let eve = wait_next_event [Key_pressed] in
       if eve.key = 'q' then raise Quit
