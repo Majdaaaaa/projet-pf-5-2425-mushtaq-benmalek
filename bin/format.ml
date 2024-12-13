@@ -3,21 +3,51 @@ open Graphics;;
 open Pf5.Geo;;
 open Pf5.Interp;;
 
-let tuple_color = Arg.Tuple [
+
+(* déclaration des variables *)
+let x_min = ref 0.
+let x_max = ref 0.
+let y_min = ref 0.
+let y_max = ref 0.
+let rect = ref {x_min = 0.; x_max = 0.; y_min = 0. ; y_max = 0.};;
+(* let rect = ref None *)
+
+let tuple_color = Arg.Tuple[
     Arg.Int (fun r -> Printf.printf "Rouge : %d\n" r);
     Arg.Int (fun v -> Printf.printf "Vert : %d\n" v);
     Arg.Int (fun b -> Printf.printf "Bleu : %d\n" b);
   ]
 
-let tuple_size = Arg.Tuple[
+let tuple_size = Arg.Tuple [
     Arg.Int (fun w -> Printf.printf "largeur = %d\n" w);
-    Arg.Int(fun h ->Printf.printf "hauteur = %d\n" h)]
+    Arg.Int (fun h -> Printf.printf "hauteur = %d\n" h);
+    ]
+
+let printf_rect() = 
+    Printf.printf "de rect x_min = %f\n" !rect.x_min;
+    Printf.printf "de rect y_min = %f\n" !rect.y_min;
+    Printf.printf "de rect x_max = %f\n" !rect.x_max;
+    Printf.printf "de rect y_max = %f\n" !rect.y_max;
+    let point = {x=0. ; y=0.} in
+      Printf.printf "est ce que la coordonnée (%f,%f)  est ici : %s\n" 0. 0. (string_of_bool (in_rectangle !rect point))
+;;
+
+let print_abs()=
+  rect:= { x_min = !x_min ; x_max = !x_max ; y_min = !y_min ; y_max = !y_max };
+  printf_rect();
+  Printf.printf "de abs x_min = %f\n" !x_min;
+  Printf.printf "de abs y_min = %f\n" !y_min;
+  Printf.printf "de abs x_max = %f\n" !x_max;
+  Printf.printf "de abs y_max = %f\n" !y_max;
+;;
+
 
 let tuple_abs = Arg.Tuple[
-    Arg.Float (fun x_min -> Printf.printf "x_min = %f\n" x_min);
-    Arg.Float (fun y_min -> Printf.printf "y_min = %f\n" y_min);
-    Arg.Float (fun x_max -> Printf.printf "x_max = %f\n" x_max);
-    Arg.Float (fun y_max -> Printf.printf "y_max = %f\n" y_max);
+    Arg.Float (fun xmin -> x_min := xmin);
+    Arg.Float (fun ymin -> y_min := ymin);
+    Arg.Float (fun xmax -> x_max := xmax);
+    Arg.Float (fun ymax -> y_max := ymax);
+    Arg.Unit  (fun () -> print_abs());
   ]
 
 
