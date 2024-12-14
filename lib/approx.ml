@@ -78,6 +78,7 @@ let run_polymorphe (transform : transformation -> 'a -> 'a) (prog : program) (i 
     in i :: aux prog i 
 ;;
 
+(* TODO : ne pas utilisé List.nth et List.length *)
 let rec over_approximate (prog : program) (r : rectangle) : rectangle =
   match prog with
   | [] -> r
