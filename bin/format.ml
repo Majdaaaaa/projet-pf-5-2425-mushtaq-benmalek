@@ -65,7 +65,6 @@ let bc =
   ] ;;
 
 let fc = 
-  Printf.printf "FC\n";
   Arg.Tuple [
     Arg.Set_int fc_r;
     Arg.Set_int fc_v;
