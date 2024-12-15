@@ -10,7 +10,7 @@ let x_max = ref 0.
 let y_min = ref 0.
 let y_max = ref 0.
 let rect = ref {x_min = 0.; x_max = 0.; y_min = 0. ; y_max = 0.};;
-(* let rect = ref None *)
+(* let f()  =  *)
 
 let tuple_color = Arg.Tuple[
     Arg.Int (fun r -> Printf.printf "Rouge : %d\n" r);
@@ -24,21 +24,23 @@ let tuple_size = Arg.Tuple [
     ]
 
 let printf_rect() = 
-    Printf.printf "de rect x_min = %f\n" !rect.x_min;
+    (* Printf.printf "de rect x_min = %f\n" !rect.x_min;
     Printf.printf "de rect y_min = %f\n" !rect.y_min;
     Printf.printf "de rect x_max = %f\n" !rect.x_max;
-    Printf.printf "de rect y_max = %f\n" !rect.y_max;
+    Printf.printf "de rect y_max = %f\n" !rect.y_max; *)
     let point = {x=0. ; y=0.} in
-      Printf.printf "est ce que la coordonnée (%f,%f)  est ici : %s\n" 0. 0. (string_of_bool (in_rectangle !rect point))
+      if in_rectangle !rect point then Printf.printf "est ce que la coordonnée (%f,%f)  est ici : %s\n" 0. 0. (string_of_bool (in_rectangle !rect point))
+      else
+      close_graph(); Printf.printf "la coordonnée (%f,%f) est pas inclut dans le rect\n" 0. 0.;
 ;;
 
 let print_abs()=
   rect:= { x_min = !x_min ; x_max = !x_max ; y_min = !y_min ; y_max = !y_max };
   printf_rect();
-  Printf.printf "de abs x_min = %f\n" !x_min;
+  (* Printf.printf "de abs x_min = %f\n" !x_min;
   Printf.printf "de abs y_min = %f\n" !y_min;
   Printf.printf "de abs x_max = %f\n" !x_max;
-  Printf.printf "de abs y_max = %f\n" !y_max;
+  Printf.printf "de abs y_max = %f\n" !y_max; *)
 ;;
 
 
@@ -55,7 +57,7 @@ let check_color x = if x > 0 && x < 256 then true else false
 
 (*Le problème est là si on enlève les () ca marche pas, psq on utilise size_x et size_y qui font parti de graphics et Ocaml évalue ça avant 
 D'avoir ouvert la fenêtre ca fais Graphics.graphics_failure ...*)
-let prog () = 
+let prog1 () = 
   let mid_x = (float_of_int (size_x ())) /. 2. in 
   let mid_y =  (float_of_int (size_y ())) /. 2. in 
   (*Carré*)
@@ -90,7 +92,7 @@ let anon_fun arg =
 let usage_msg = "inter ...  Option disponible :"
 
 
-
+(* TODO rattrapper les exceptions pr close graphe *)
 
 
 
