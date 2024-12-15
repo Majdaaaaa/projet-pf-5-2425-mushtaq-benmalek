@@ -1,6 +1,6 @@
 exception Quit;;
 open Graphics;;
-open_graph " 800x600";;
+(* open_graph " 800x600";; *)
 
 let draw_line (x1, y1) (x2, y2) =
   moveto x1 y1;
@@ -15,6 +15,7 @@ let () =
     ) 
     else 
       Arg.parse Format.speclist Format.anon_fun Format.usage_msg;
+    Option.size();
     Option.bc ();
     (*? changement de la couleur de l'avant plan pour dessiner le repère *)
     Option.fc ();

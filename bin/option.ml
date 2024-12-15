@@ -24,4 +24,10 @@ let pc () =
 
 let cr i () =
   if !is_abs = false || (!is_abs && !is_cr) then 
-    Cr.run (Cr.prog ()) 1. i;
+    Cr.run (Cr.prog ()) 1. i;;
+
+
+let size() =
+  let res = " "^string_of_int !w^"x"^string_of_int !h in
+  open_graph res
+;;

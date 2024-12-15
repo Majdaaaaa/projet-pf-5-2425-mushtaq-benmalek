@@ -19,9 +19,14 @@ let pc_r = ref 0;;
 let pc_v = ref 0;;
 let pc_b = ref 0;;
 let is_pc = ref false;;
+
+(* SIZE *)
+let w = ref 800;;
+let h = ref 600;;
+(* let is_size = ref false;; *)
+
 (* ABS : juste poue testé le fait que si y'a que abs activé les points sont plus là *)
 let is_abs = ref false;;
-
 (* déclaration des variables *)
 let x_min = ref 0.
 let x_max = ref 0.
@@ -35,11 +40,6 @@ let tuple_color = Arg.Tuple[
     Arg.Int (fun v -> Printf.printf "Vert : %d\n" v);
     Arg.Int (fun b -> Printf.printf "Bleu : %d\n" b);
   ]
-
-let tuple_size = Arg.Tuple [
-    Arg.Int (fun w -> Printf.printf "largeur = %d\n" w);
-    Arg.Int (fun h -> Printf.printf "hauteur = %d\n" h);
-    ]
 
 let printf_rect() = 
     (* Printf.printf "de rect x_min = %f\n" !rect.x_min;
@@ -113,6 +113,10 @@ let pc =
   ];
 ;;
 
+let size = Arg.Tuple [
+    Arg.Set_int w;
+    Arg.Set_int h;
+    ]
 
 (* Les options dessins doivent être mis aprés -fc ou -bc  *)
 (* Nouvel ordre a respecté : -bc avant -fc *)
@@ -128,8 +132,7 @@ let speclist = [
   ("-fc", fc, "Couleur de l’avant plan");
   ("-rc", tuple_color, "Couleur du rectangle");
   ("-pc", pc, "Couleur du point");
-  ("-size",tuple_size,"Dimension de la fenêtre en pixels avec W = largeur, H = hauteur");
-  (* ("-1", Arg.Unit (fun () -> Printf.printf "Vous avez choisi le programme %d\n" 1),"programme à choisir") *)
+  ("-size",size,"Dimension de la fenêtre en pixels avec W = largeur, H = hauteur");
 ]
 
 
