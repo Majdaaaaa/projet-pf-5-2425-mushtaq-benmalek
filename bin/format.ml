@@ -1,6 +1,8 @@
 open Graphics;;
 open Pf5.Geo;;
-open Pf5.Interp;;
+open Pf5.Prog;;
+
+(* open Pf5.Interp;; *)
 
 (* BC *)
 let bc_r = ref 0;;
@@ -23,17 +25,17 @@ let is_pc = ref false;;
 (* SIZE *)
 let w = ref 800;;
 let h = ref 600;;
-(* let is_size = ref false;; *)
 
 (* ABS : juste poue testé le fait que si y'a que abs activé les points sont plus là *)
 let is_abs = ref false;;
-(* déclaration des variables *)
 let x_min = ref 0.
 let x_max = ref 0.
 let y_min = ref 0.
 let y_max = ref 0.
 let rect = ref {x_min = 0.; x_max = 0.; y_min = 0. ; y_max = 0.};;
-(* let f()  =  *)
+
+(* PROGRAM*)
+let programme = ref None;;
 
 let tuple_color = Arg.Tuple[
     Arg.Int (fun r -> Printf.printf "Rouge : %d\n" r);
@@ -76,7 +78,7 @@ let check_color x = if x > 0 && x < 256 then true else false
 
 (*Le problème est là si on enlève les () ca marche pas, psq on utilise size_x et size_y qui font parti de graphics et Ocaml évalue ça avant 
   D'avoir ouvert la fenêtre ca fais Graphics.graphics_failure ...*)
-let prog () = 
+(* let prog1 () = 
   let mid_x = (float_of_int (size_x ())) /. 2. in 
   let mid_y =  (float_of_int (size_y ())) /. 2. in 
   (*Carré*)
@@ -85,7 +87,7 @@ let prog () =
         Move (Translate {x = 1.0*.42.10526316; y = 0.0*.52.63157895});  
         Move (Rotate ({x = mid_x; y = mid_y}, 90.0))  
       ])
-  ];;
+  ];; *)
 
 let bc = 
   Printf.printf "BC\n";
@@ -138,9 +140,9 @@ let speclist = [
 
 let anon_fun arg = 
   match arg with
-  | "1" -> Printf.printf "c'est le programme  un : %s\n" arg
-  | "2" -> Printf.printf "c'est le programme deux : %s\n" arg
-  | "3" -> Printf.printf "c'est le programme trois : %s\n" arg
+  | "1" -> (fun () -> prog1 := programme)
+  | "2" -> (fun () -> prog2 := programme)
+  | "3" -> (fun () -> prog3 := programme)
   | _ -> close_graph();Printf.printf "c'est quoi ça ? \n"
 
 
