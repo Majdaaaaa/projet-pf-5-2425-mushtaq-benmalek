@@ -8,13 +8,16 @@ let bc_r = ref 0;;
 let bc_v = ref 0;;
 let bc_b = ref 0;;
 let is_bc = ref false;;
+
 (* CR *)
 let is_cr = ref false;;
+
 (* FC *)
 let fc_r = ref 0;;
 let fc_v = ref 0;;
 let fc_b = ref 0;;
 let is_fc = ref false;;
+
 (* PC *)
 let pc_r = ref 0;;
 let pc_v = ref 0;;
@@ -33,6 +36,12 @@ let y_min = ref 0.
 let y_max = ref 0.
 let rect = ref {x_min = 0.; x_max = 0.; y_min = 0. ; y_max = 0.};;
 
+(* RC*)
+let rc_r = ref 0;;
+let rc_v = ref 0;;
+let rc_b = ref 0;;
+let is_rc = ref false;;
+
 (* PROGRAM*)
 let programme = ref [];;
 
@@ -43,10 +52,10 @@ let tuple_color = Arg.Tuple[
   ]
 
 let printf_rect() = 
-  (* Printf.printf "de rect x_min = %f\n" !rect.x_min;
-     Printf.printf "de rect y_min = %f\n" !rect.y_min;
-     Printf.printf "de rect x_max = %f\n" !rect.x_max;
-     Printf.printf "de rect y_max = %f\n" !rect.y_max; *)
+  Printf.printf "de rect x_min = %f\n" !rect.x_min;
+  Printf.printf "de rect y_min = %f\n" !rect.y_min;
+  Printf.printf "de rect x_max = %f\n" !rect.x_max;
+  Printf.printf "de rect y_max = %f\n" !rect.y_max;
   let point = {x=0. ; y=0.} in
   if in_rectangle !rect point then Printf.printf "est ce que la coordonnée (%f,%f)  est ici : %s\n" 0. 0. (string_of_bool (in_rectangle !rect point))
   else
@@ -74,6 +83,23 @@ let tuple_abs = Arg.Tuple[
 
 
 let check_color x = if x >= 0 && x < 256 then true else false
+
+let abs = Arg.Tuple[
+    Arg.Float (fun xmin -> x_min := xmin);
+    Arg.Float (fun ymin -> y_min := ymin);
+    Arg.Float (fun xmax -> x_max := xmax);
+    Arg.Float (fun ymax -> y_max := ymax);
+    Arg.Unit (fun () -> 
+        rect := { x_min = !x_min; x_max = !x_max; y_min = !y_min; y_max = !y_max });
+    (* Arg.Set_float x_min;
+       Arg.Set_float y_min;
+       Arg.Set_float x_max;
+       Arg.Set_float y_max;
+       Arg.Unit (fun () -> Printf.printf "j'affecte mes val\n"); *)
+    (* Arg.Unit  (fun () -> print_abs()); *)
+    (* Arg.Unit (fun () -> run_abs rect); *)
+    Arg.Set is_abs;
+  ]
 
 let bc = 
   Arg.Tuple [
@@ -107,22 +133,39 @@ let size =
   ]
 ;;
 
-  let speclist = [
-    ("-abs",tuple_abs,"Affichage de rectangles et approximation initiale");
-    ("-cr", Arg.Set is_cr,"Affichage des points");
-    ("-bc", bc , "Couleur de l'arrière-plan");
-    ("-fc", fc, "Couleur de l’avant plan");
-    ("-rc", tuple_color, "Couleur du rectangle");
-    ("-pc", pc, "Couleur du point");
-    ("-size",size,"Dimension de la fenêtre en pixels avec W = largeur, H = hauteur");
+let rc = 
+  Arg.Tuple[
+    Arg.Set_int rc_r;
+    Arg.Set_int rc_v;
+    Arg.Set_int rc_b;
+    Arg.Set is_rc;
   ]
+
+
+let speclist = [
+  ("-abs",tuple_abs,"Affichage de rectangles et approximation initiale");
+  ("-cr", Arg.Set is_cr,"Affichage des points");
+  ("-bc", bc , "Couleur de l'arrière-plan");
+  ("-fc", fc, "Couleur de l’avant plan");
+  ("-rc", rc, "Couleur du rectangle");
+  ("-pc", pc, "Couleur du point");
+  ("-size",size,"Dimension de la fenêtre en pixels avec W = largeur, H = hauteur");
+]
+
+
+(* let anon_fun arg = 
+   match arg with
+   | "1" -> (fun () -> programme := prog1 )
+   | "2" -> (fun () -> programme := prog2 )
+   | "3" -> (fun () -> programme := prog3 )
+   | _ ->   (fun () -> programme := prog1 ) *)
 
 
 let anon_fun arg = 
   match arg with
   | "1" ->  programme := prog1 ()
   | "2" -> programme :=  prog2 ()
-  | "3" ->  programme :=  prog3 ()
+  | "3" ->  programme :=  prog5 ()
   | _ ->   close_graph ()
 ;;
 

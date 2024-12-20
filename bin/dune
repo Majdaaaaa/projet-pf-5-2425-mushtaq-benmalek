@@ -1,5 +1,5 @@
 (executable
 	(public_name interp)
-	(modules cr interp repere format init option prog )
+	(modules cr interp repere format init option prog abs)
 	(libraries graphics pf5)
 )
