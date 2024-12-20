@@ -1,10 +1,15 @@
 open Graphics;;
 open Format;;
 
+let abs() =
+  if !is_abs then 
+    Abs.draw_abs !rect
+;;
+
 let bc ()= 
   if !is_bc then 
     let c = rgb !bc_r !bc_v !bc_b in
-    Printf.printf "%d %d %d\n" !bc_r !bc_v !bc_b;
+    (* Printf.printf "%d %d %d\n" !bc_r !bc_v !bc_b; *)
     set_color c; 
     clear_graph (); 
     fill_rect 0 0 (size_x()) (size_y());
@@ -30,4 +35,10 @@ let cr i () =
 let size() =
   let res = " "^string_of_int !w^"x"^string_of_int !h in
   open_graph res
+;;
+
+let rc() = 
+  if !is_rc then 
+    let c = rgb !rc_r !rc_v !rc_b in
+    set_color c
 ;;

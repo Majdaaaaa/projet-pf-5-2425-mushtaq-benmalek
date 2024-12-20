@@ -20,6 +20,8 @@ let () =
     (*? changement de la couleur de l'avant plan pour dessiner le repère *)
     Option.fc ();
     Init.init_graphics ();
+    Option.rc();
+    Option.abs();
     while true do
       let eve = wait_next_event [Key_pressed] in
       if eve.key = 'q' then raise Quit;

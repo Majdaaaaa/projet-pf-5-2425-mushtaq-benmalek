@@ -1,3 +1,7 @@
+open Graphics;;
+open Pf5.Geo;;
+open Pf5.Interp;;
+
 let prog1 () = 
   let mid_x = (float_of_int (size_x ())) /. 2. in 
   let mid_y =  (float_of_int (size_y ())) /. 2. in 
