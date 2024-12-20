@@ -1,5 +1,6 @@
 open Graphics;;
 open Pf5.Geo;;
+open Pf5.Approx;;
 
 
   let draw_abs rect =
@@ -13,6 +14,31 @@ open Pf5.Geo;;
     fill_rect int_x_min int_y_min w h
 ;;
 
+
+let run_abs prog rect =
+    rect := over_approximate prog !rect;
+    draw_abs !rect
+;;
+
+(* let run_abs prog rect =
+    let rec aux prog() rect =
+        match prog with
+            | [] -> draw_abs !rect;
+            | a::w ->
+                draw_abs !rect; 
+                let val_rect = !rect in
+                rect := over_approximate a val_rect;
+                aux w rect
+    in aux prog() rect
+;; *)
+
+
+
+
+(* let run_abs prog rect =
+    let res = over_approximate prog rect
+    in draw_abs res
+;; *)
 
 
 (* DEBUG *)

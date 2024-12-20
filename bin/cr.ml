@@ -2,6 +2,22 @@ open Graphics;;
 open Pf5.Geo;;
 open Pf5.Interp;;
 
+(* let prog () =
+  let mid_x = (float_of_int (size_x ())) /. 2. in
+  let mid_y = (float_of_int (size_y ())) /. 2. in
+  [
+    (* Point dans le premier quadrant (x > 0, y > 0) *)
+    Move (Translate {x = mid_x +. 50.0; y = mid_y +. 50.0});
+    (* Point dans le deuxième quadrant (x < 0, y > 0) *)
+    Move (Translate {x = mid_x -. 50.0; y = mid_y +. 50.0});
+    (* Point dans le troisième quadrant (x < 0, y < 0) *)
+    Move (Translate {x = mid_x -. 50.0; y = mid_y -. 50.0});
+    (* Point dans le quatrième quadrant (x > 0, y < 0) *)
+    Move (Translate {x = mid_x +. 50.0; y = mid_y -. 50.0});
+  ]
+;; *)
+
+
 
 let prog () = 
   let mid_x = (float_of_int (size_x ())) /. 2. in 

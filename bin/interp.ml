@@ -2,9 +2,9 @@ exception Quit;;
 open Graphics;;
 (* open_graph " 800x600";; *)
 
-let draw_line (x1, y1) (x2, y2) =
+(* let draw_line (x1, y1) (x2, y2) =
   moveto x1 y1;
-  lineto x2 y2;;
+  lineto x2 y2;; *)
 let i = ref 0;;
 let () =
   try
@@ -21,7 +21,7 @@ let () =
     Option.fc ();
     Init.init_graphics ();
     Option.rc();
-    Option.abs();
+    (* Option.abs(); *)
     while true do
       let eve = wait_next_event [Key_pressed] in
       if eve.key = 'q' then raise Quit;
@@ -29,11 +29,12 @@ let () =
         (* ? pour dessiné les points de la couleur demandé *)
         Option.pc ();
         Option.cr !i ();
+        Option.abs !i ();
         i := !i+1;
       );
       (* ? rétablir la couleur de l'avant plan demandé *)
       Option.fc ();
-      draw_line (0, 0) (30, 20);
+      (* draw_line (0, 0) (30, 20); *)
     done
   with 
   | Quit -> close_graph ();;
