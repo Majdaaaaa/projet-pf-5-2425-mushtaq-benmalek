@@ -1,24 +1,26 @@
 exception Quit;;
 open Graphics;;
-open_graph " 800x600";;
 
-let draw_line (x1, y1) (x2, y2) =
-  moveto x1 y1;
-  lineto x2 y2;;
+(* open_graph " 800x600";; *)
+
 let i = ref 0;;
+
 let () =
+  Option.size();
   try
-    (* let nbargs = Array.length Sys.argv in *)
-    (* if nbargs <= 1 then ( 
+    let nbargs = Array.length Sys.argv in 
+    if nbargs <= 1 then ( 
       Option.cr !i ();
-      Printf.printf "Il manque des arguments\n";
-      (* raise Quit; *)
+      Printf.printf "Il faut donné un programme a éxécuté\n";
+      raise Quit;
     ) 
-    else  *)
-      Arg.parse Format.speclist Format.anon_fun Format.usage_msg;
+    else 
+      Arg.parse Format.speclist Format.anon_fun Format.usage_msg; 
     Option.bc ();
     (*? changement de la couleur de l'avant plan pour dessiner le repère *)
     Option.fc ();
+    Init.init_graphics ();
+    Option.bc ();
     Init.init_graphics ();
     while true do
       let eve = wait_next_event [Key_pressed] in
@@ -29,9 +31,13 @@ let () =
         Option.cr !i ();
         i := !i+1;
       );
+      if eve.key = 'e' then (
+        Option.bc ();
+        Init.init_graphics ();
+      );
       (* ? rétablir la couleur de l'avant plan demandé *)
       Option.fc ();
-      draw_line (0, 0) (30, 20);
     done
   with 
-  | Quit -> close_graph ();;
+  | Quit -> close_graph ()
+  | Option.Arg -> Printf.printf "Mauvais arguments "; close_graph ();;
