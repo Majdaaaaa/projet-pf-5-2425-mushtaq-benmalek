@@ -1,5 +1,6 @@
 open Graphics;;
 open Format;;
+open Prog;;
 
 let bc ()= 
   if !is_bc then 
@@ -24,4 +25,4 @@ let pc () =
 
 let cr i () =
   if !is_abs = false || (!is_abs && !is_cr) then 
-    Cr.run (Cr.prog ()) 1. i;
+    Cr.run (prog1 ()) i;

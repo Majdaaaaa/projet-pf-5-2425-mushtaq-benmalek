@@ -8,12 +8,13 @@ let draw_line (x1, y1) (x2, y2) =
 let i = ref 0;;
 let () =
   try
-    let nbargs = Array.length Sys.argv in
-    if nbargs <= 1 then ( 
+    (* let nbargs = Array.length Sys.argv in *)
+    (* if nbargs <= 1 then ( 
+      Option.cr !i ();
       Printf.printf "Il manque des arguments\n";
-      raise Quit;
+      (* raise Quit; *)
     ) 
-    else 
+    else  *)
       Arg.parse Format.speclist Format.anon_fun Format.usage_msg;
     Option.bc ();
     (*? changement de la couleur de l'avant plan pour dessiner le repère *)
