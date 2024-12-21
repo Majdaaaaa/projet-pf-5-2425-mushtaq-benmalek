@@ -1,6 +1,7 @@
 open Graphics;;
 open Format;;
 open Pf5.Interp;;
+open Pf5.Approx;;
 
   let rec list_nth l k = 
     match l with 
@@ -31,7 +32,6 @@ let stock_prog = ref (!prog);;
 
 let abs j () =
     if !is_abs then
-    (* let list = Prog.profg() in  *)
     let size = list_length !prog in
     (* Printf.printf "size = %d \n" size; *)
     if j < size then
@@ -57,13 +57,11 @@ let ae i () =
 let bc ()= 
   if !is_bc then 
     let c = rgb !bc_r !bc_v !bc_b in
-    (* if check_color !bc_r && check_color !bc_v && check_color !bc_b then ( *)
       Printf.printf "%d %d %d\n" !bc_r !bc_v !bc_b;
       set_color c; 
       clear_graph (); 
       fill_rect 0 0 (size_x()) (size_y());
       set_color white
-      (* ) *)
 ;;
 
 
