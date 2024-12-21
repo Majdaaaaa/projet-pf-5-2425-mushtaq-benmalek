@@ -156,13 +156,13 @@ let ae = Arg.Tuple[
 
 
 let speclist = [
-  ("-abs",abs,"x_min y_min x_max y_max : Affichage de rectangles et approximation initiale");
+  ("-abs",abs,"x_min y_min x_max y_max : approximation de la position avec sur-approximation du Either");
   ("-cr", Arg.Set is_cr,": Affichage des points");
   ("-bc", bc , "r v b : Couleur de l'arrière-plan");
   ("-fc", fc, "r v b : Couleur de l’avant plan");
   ("-rc", rc, "r v b : Couleur du rectangle");
   ("-pc", pc, "r v b : Couleur du point");
-  ("-ae", ae , "x_min y_min x_max y_max : approximation de la position avec sur-approximation du Either");
+  ("-ae", ae , "x_min y_min x_max y_max : Affichage de rectangles et approximation initiale");
   ("-size",size,"w h : Dimension de la fenêtre en pixels avec W = largeur, H = hauteur");
 ]
 

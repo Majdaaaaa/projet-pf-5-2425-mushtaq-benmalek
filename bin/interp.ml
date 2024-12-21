@@ -5,6 +5,7 @@ open Format;;
 let i = ref 0;;
 let j = ref (-1);;
 
+
 let drawing () = 
   Option.rc();
   Option.abs !j ();
@@ -30,6 +31,7 @@ let () =
     (*? changement de la couleur de l'avant plan pour dessiner le repère *)
     Option.fc ();
     Init.init_graphics ();
+    Option.not_detereministic !prog;
     while true do
       let eve = wait_next_event [Key_pressed] in
       if eve.key = 'q' then raise Quit;
@@ -53,4 +55,4 @@ let () =
   | Rc_only -> Printf.printf "L'option -rc doit être utiliser avec l'option -abs ou -ae.\n"
   | Not_color -> Printf.printf "Ce n'est pas une couleur valide.\n"
 
-  (* "Choissisez entre le programme 1,2,3 ou 4 "*)
+(* "Choissisez entre le programme 1,2,3 ou 4 "*)
