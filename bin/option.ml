@@ -29,7 +29,6 @@ let print_programme prog =
 
 let abs j () =
     if !is_abs then
-    (* let list = Prog.profg() in  *)
     let size = list_length !prog in
     (* Printf.printf "size = %d \n" size; *)
     if j < size then
@@ -115,17 +114,3 @@ let choix_prog () =
   |4-> prog := prog4 ()
   |_ -> Printf.printf "lololo"
 ;;
-
-(* let abs() =
-   if !is_abs then 
-   (* Abs.draw_abs !rect *)
-   Abs.run_abs (prog()) !rect 
-   ;; *)
-
-
-(*
-Printf.printf "dans abs()\n"; *)
-(* printf_rect(); *)
-(* Printf.printf "\n"; *)
-(* Abs.run_abs !rect
-*)

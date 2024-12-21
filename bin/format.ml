@@ -117,14 +117,14 @@ let ae = Arg.Tuple[
 
 
 let speclist = [
-  ("-abs",abs,"x_min y_min x_max y_max -> Affichage de rectangles et approximation initiale");
-  ("-cr", Arg.Set is_cr,"-> Affichage des points");
-  ("-bc", bc , "r v b -> Couleur de l'arrière-plan");
-  ("-fc", fc, "r v b -> Couleur de l’avant plan");
+  ("-abs",abs,"x_min y_min x_max y_max : Affichage de rectangles et approximation initiale");
+  ("-cr", Arg.Set is_cr,": Affichage des points");
+  ("-bc", bc , "r v b : Couleur de l'arrière-plan");
+  ("-fc", fc, "r v b : Couleur de l’avant plan");
   ("-rc", rc, "r v b : Couleur du rectangle");
   ("-pc", pc, "r v b : Couleur du point");
-  ("-ae", ae , "-> Approximation qui scinde le Either");
-  ("-size",size,"w h -> Dimension de la fenêtre en pixels avec W = largeur, H = hauteur");
+  ("-ae", ae , "x_min y_min x_max y_max : approximation de la position avec sur-approximation du Either");
+  ("-size",size,"w h : Dimension de la fenêtre en pixels avec W = largeur, H = hauteur");
 ]
 
 let anon_fun arg = 
@@ -137,7 +137,7 @@ let anon_fun arg =
 ;;
 
 
-let usage_msg = "inter ...  Option disponible :";;
+let usage_msg = "inter ...  Options disponibles :";;
 
 let check_color r g b  = if r >= 0 && r < 256  && g >= 0 && g < 256 && b >= 0 && b < 256 then true else false
 
