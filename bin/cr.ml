@@ -2,7 +2,7 @@ open Graphics;;
 open Pf5.Geo;;
 open Pf5.Interp;;
 
-(* let prog () =
+let prog () =
   let mid_x = (float_of_int (size_x ())) /. 2. in
   let mid_y = (float_of_int (size_y ())) /. 2. in
   [
@@ -15,11 +15,11 @@ open Pf5.Interp;;
     (* Point dans le quatrième quadrant (x > 0, y < 0) *)
     Move (Translate {x = mid_x +. 50.0; y = mid_y -. 50.0});
   ]
-;; *)
+;;
 
 
 
-let prog () = 
+(* let prog () = 
   let mid_x = (float_of_int (size_x ())) /. 2. in 
   let mid_y =  (float_of_int (size_y ())) /. 2. in 
   (*Carré*)
@@ -28,7 +28,7 @@ let prog () =
         Move (Translate {x = 1.0*.42.10526316; y = 0.0*.52.63157895});  
         Move (Rotate ({x = mid_x; y = mid_y}, 90.0))  
       ])
-  ];;
+  ];; *)
 (* let prog () =
    let mid_x = (float_of_int (size_x ())) /. 2. in 
    let mid_y =  (float_of_int (size_y ())) /. 2. in 

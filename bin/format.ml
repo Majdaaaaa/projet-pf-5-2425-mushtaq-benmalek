@@ -37,6 +37,9 @@ let y_min = ref 0.
 let y_max = ref 0.
 let rect = ref {x_min = 0.; x_max = 0.; y_min = 0. ; y_max = 0.};;
 
+(* AE *)
+let is_ae = ref false;;
+
 (* RC*)
 let rc_r = ref 0;;
 let rc_v = ref 0;;
@@ -139,6 +142,17 @@ let rc =
     Arg.Set_int rc_b;
     Arg.Set is_rc;
   ]
+;;
+
+let ae = Arg.Tuple[
+    Arg.Float (fun xmin -> x_min := xmin);
+    Arg.Float (fun ymin -> y_min := ymin);
+    Arg.Float (fun xmax -> x_max := xmax);
+    Arg.Float (fun ymax -> y_max := ymax);
+    Arg.Unit (fun () -> 
+      rect := { x_min = !x_min; x_max = !x_max; y_min = !y_min; y_max = !y_max });
+    Arg.Set is_ae;
+  ]
 
 
 (* Les options dessins doivent être mis aprés -fc ou -bc  *)
@@ -152,6 +166,7 @@ let speclist = [
   ("-fc", fc, "Couleur de l’avant plan");
   ("-rc", rc, "Couleur du rectangle");
   ("-pc", pc, "Couleur du point");
+  ("-ae", ae , "Approximation qui scinde le Either");
   ("-size",size,"Dimension de la fenêtre en pixels avec W = largeur, H = hauteur");
 ]
 

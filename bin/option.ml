@@ -79,6 +79,16 @@ let abs i () =
       Abs.run_abs [programme] rect 
 ;;
 
+(* let ae i () =
+  if !is_ae = true && !is_abs = true then close_graph();
+else
+  if !is_ae then
+    let list = prog() in 
+    let size = list_nth i in
+    if i < size then
+      let list_rect =  *)
+      
+
 let bc ()= 
   if !is_bc then 
     let c = rgb !bc_r !bc_v !bc_b in
