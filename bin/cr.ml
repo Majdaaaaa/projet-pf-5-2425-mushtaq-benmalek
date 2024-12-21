@@ -2,66 +2,6 @@ open Graphics;;
 open Pf5.Geo;;
 open Pf5.Interp;;
 
-(* let prog () =
-  let mid_x = (float_of_int (size_x ())) /. 2. in
-  let mid_y = (float_of_int (size_y ())) /. 2. in
-  [
-    (* Point dans le premier quadrant (x > 0, y > 0) *)
-    Move (Translate {x = mid_x +. 50.0; y = mid_y +. 50.0});
-    (* Point dans le deuxième quadrant (x < 0, y > 0) *)
-    Move (Translate {x = mid_x -. 50.0; y = mid_y +. 50.0});
-    (* Point dans le troisième quadrant (x < 0, y < 0) *)
-    Move (Translate {x = mid_x -. 50.0; y = mid_y -. 50.0});
-    (* Point dans le quatrième quadrant (x > 0, y < 0) *)
-    Move (Translate {x = mid_x +. 50.0; y = mid_y -. 50.0});
-  ] *)
-(* ;; *)
-
-let prog () =
-  let mid_x = 0.0 in
-  let mid_y = 0.0 in
-  [
-    (* Point dans le premier quadrant (x > 0, y > 0) *)
-    Move (Translate {x = mid_x +. 5.0; y = mid_y +. 5.0});
-    (* Point dans le deuxième quadrant (x < 0, y > 0) *)
-    Move (Translate {x = mid_x -. 2.0; y = mid_y +. 2.0});
-    (* Point dans le troisième quadrant (x < 0, y < 0) *)
-    Move (Translate {x = mid_x -. 5.0; y = mid_y -. 5.0});
-    (* Point dans le quatrième quadrant (x > 0, y < 0) *)
-    Move (Translate {x = mid_x +. 1.0; y = mid_y -. 1.0});
-    (* Retour au centre *)
-    (* Move (Translate {x = -.mid_x; y = -.mid_y}); *)
-  ]
-;;
-
-
-
-
-(* let prog () = 
-  let mid_x = (float_of_int (size_x ())) /. 2. in 
-  let mid_y =  (float_of_int (size_y ())) /. 2. in 
-  (*Carré*)
-  [
-    Repeat (4, [
-        Move (Translate {x = 1.0*.42.10526316; y = 0.0*.52.63157895});  
-        Move (Rotate ({x = mid_x; y = mid_y}, 90.0))  
-      ])
-  ];; *)
-(* let prog () =
-   let mid_x = (float_of_int (size_x ())) /. 2. in 
-   let mid_y =  (float_of_int (size_y ())) /. 2. in 
-   let steps = 360 in          (* Number of steps to approximate the circle *)
-   let step_length = 2. in    (* Length of each translation step *)
-   let center = {x=mid_x; y=mid_y} in  (* Rotate around the origin (0, 0) *)
-   let rotation_angle = 1.0 in (* Rotate by 1 degree per step *)
-   [
-    Repeat (steps, [
-        Move (Translate ({x=step_length; y=0.0}));   (* Translate step_length forward *)
-        Move (Rotate (center ,rotation_angle)) (* Rotate around the center by rotation_angle *)
-      ])
-   ]
-   ;; *)
-
 let rec list_length l = 
   match l with 
   |[] -> 0
@@ -73,16 +13,27 @@ let rec list_nth l k =
   |[a] -> if k==0 then a else failwith "existe pas"
   |a::w -> if k==0 then a else list_nth w (k-1)
 ;;
-let run prog scale i = 
-  (* let color = rgb !(Format.r) !(Format.v) !(Format.b) in set_color color; *)
-  let mid_x = (float_of_int (size_x ())) /. 2. in 
-  let mid_y =  (float_of_int (size_y ())) /. 2. in 
-  let point = run prog {x=mid_x ; y=mid_y} in 
-  (* List.iter (fun p -> Printf.printf "(%f, %f)\n" p.x p.y) point; *)
-  let aux l  = 
-    if i < list_length l then 
-      let x = (int_of_float ((list_nth l i).x *. scale)) in 
-      let y = (int_of_float ((list_nth l i).y *. scale))
-      in Printf.printf "Plotting at: (%d, %d)\n" x y;
-      fill_circle x y 3 ; 
-  in aux point ; 
+
+let dessin prog i =
+  let sx = size_x ()/19 in 
+  let sy = size_y ()/19 in
+  let mid_x = size_x () / 2 in 
+  let mid_y =  size_y () / 2 in 
+  let l = run (prog) {x=0. ; y=0.}  in
+  if i < list_length l  then 
+    let p = list_nth l i in
+    let p_x = (Float.to_int p.x) in 
+    let p_y = (Float.to_int p.y) in
+    let x = mid_x + ((p_x) * sx) in
+    let y = mid_y + ((p_y) * sy) in 
+    (* Printf.printf "Plotting at: (%d, %d)\n" x y; *)
+    (* Printf.printf "x = [%d] ,  y =[%d]\n"  p_x p_y; *)
+    fill_circle x y ((max sx sy)/10);;
+
+let run prog i =
+  dessin prog i
+;;
+
+(* let run_ligne prog = 
+   let points = point prog in 
+   List.iter (fun p -> lineto (int_of_float p.x) (int_of_float p.y)) points;; *)

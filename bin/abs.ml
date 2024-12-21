@@ -25,9 +25,9 @@ let run_abs prog rect =
     Printf.printf "de rect y_min = %f\n" !rect.y_min;
     Printf.printf "de rect x_max = %f\n" !rect.x_max;
     Printf.printf "de rect y_max = %f\n" !rect.y_max;
-;; 
+   ;; 
 
-(* printf_rect rect;
+   (* printf_rect rect;
     Printf.printf "Origine : (%d, %d)\n" (fst origine) (snd origine);
     Printf.printf "int_x_min : %d (origine x: %d, rect.x_min: %f)\n" int_x_min (fst origine) !rect.x_min;
     Printf.printf "int_y_min : %d (origine y: %d, rect.y_min: %f)\n" int_y_min (snd origine) !rect.y_min;

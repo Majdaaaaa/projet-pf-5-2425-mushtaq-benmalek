@@ -1,21 +1,24 @@
 open Graphics;;
 open Format;;
+open Prog;;
 open Pf5.Interp;;
+
+let prog = ref [] ;;
 open Pf5.Approx;;
   
 
-let rec list_nth l k = 
+  let rec list_nth l k = 
     match l with 
     |[] -> failwith "liste vide"
     |[a] -> if k==0 then a else failwith "existe pas"
     |a::w -> if k==0 then a else list_nth w (k-1)
   ;;
 
-  let rec list_length l = 
-    match l with 
-    |[] -> 0
-    |_::w -> 1 + list_length w
-  ;;
+let rec list_length l = 
+  match l with 
+  |[] -> 0
+  |_::w -> 1 + list_length w
+;;
 
 let print_programme prog =
   match prog with
@@ -25,26 +28,23 @@ let print_programme prog =
 ;;
 
 let abs j () =
-  if !is_abs = true && !is_ae = true then close_graph()
-  else
     if !is_abs then
-    let list = Prog.profg() in 
-    let size = list_length list in
-    if j< size then
+    (* let list = Prog.profg() in  *)
+    let size = list_length !prog in
+    (* Printf.printf "size = %d \n" size; *)
+    if j < size then
       if j = -1 then Abs.draw_rect !rect
       else
-      let programme = list_nth list j in
+      let programme = list_nth !prog j in
       (* Printf.printf "j = %d\n" j; *)
-      print_programme programme;
+      (* print_programme programme; *)
       (* Printf.printf "La taille de la liste est %d\n" size; *)
       Abs.run_abs [programme] rect
 ;;
 
 let ae i () =
-  if !is_ae = true && !is_abs = true then close_graph()
-else
   if !is_ae then
-    let rect_list = run_rect (Prog.profg()) !rect in
+    let rect_list = run_rect !prog !rect in
     let size = list_length rect_list  in
     if i < size then
       let r = list_nth rect_list i in
@@ -53,13 +53,17 @@ else
       
 
 let bc ()= 
+  (* Printf.printf "w : %d , h : %d\n" !w !h; *)
   if !is_bc then 
     let c = rgb !bc_r !bc_v !bc_b in
-    (* Printf.printf "%d %d %d\n" !bc_r !bc_v !bc_b; *)
-    set_color c; 
-    clear_graph (); 
-    fill_rect 0 0 (size_x()) (size_y());
-    set_color white;;
+    (* if check_color !bc_r && check_color !bc_v && check_color !bc_b then ( *)
+      Printf.printf "%d %d %d\n" !bc_r !bc_v !bc_b;
+      set_color c; 
+      clear_graph (); 
+      fill_rect 0 0 (size_x()) (size_y());
+      set_color white
+      (* ) *)
+;;
 
 
 let fc () =
@@ -70,15 +74,29 @@ let fc () =
 
 let pc () =
   if !is_pc then
-    let c = rgb !pc_r !pc_v !pc_b in
-    set_color c;;
+    (* if check_color !pc_r && check_color !pc_v && check_color !pc_b then ( *)
+      let c = rgb !pc_r !pc_v !pc_b in
+      set_color c
+      (* ) *)
+
+;;
 
 let cr i () =
   if !is_abs = false || (!is_abs && !is_cr) then 
-    Cr.run (Cr.prog ()) 1. i;;
+    if is_deterministic !prog then 
+      Cr.run (!prog) i
+    else 
+      let lp = all_choices !prog in
+      let rec aux j = 
+        if j < list_length lp then 
+          let prog = list_nth lp j in
+          Cr.run prog i;
+          aux (j+1)
+      in aux 0
+;;
 
-
-let size() =
+let size () = 
+  (* Printf.printf "w : %d , h : %d\n" !w !h; *)
   let res = " "^string_of_int !w^"x"^string_of_int !h in
   open_graph res
 ;;
@@ -88,3 +106,26 @@ let rc() =
     let c = rgb !rc_r !rc_v !rc_b in
     set_color c
 ;;
+
+let choix_prog () = 
+  match !programme with 
+  |1-> prog := prog1 ()
+  |2-> prog := prog2 ()
+  |3-> prog := prog3 ()
+  |4-> prog := prog4 ()
+  |_ -> Printf.printf "lololo"
+;;
+
+(* let abs() =
+   if !is_abs then 
+   (* Abs.draw_abs !rect *)
+   Abs.run_abs (prog()) !rect 
+   ;; *)
+
+
+(*
+Printf.printf "dans abs()\n"; *)
+(* printf_rect(); *)
+(* Printf.printf "\n"; *)
+(* Abs.run_abs !rect
+*)
