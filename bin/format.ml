@@ -46,7 +46,7 @@ let rc_b = ref 0;;
 let is_rc = ref false;;
 
 (* PROGRAM*)
-let programme = ref 0;;
+let prog = ref [];;
 
 let tuple_color = Arg.Tuple[
     Arg.Int (fun r -> Printf.printf "Rouge : %d\n" r);
@@ -180,10 +180,10 @@ let speclist = [
 
 let anon_fun arg = 
   match arg with
-  | "1" -> programme := 1
-  | "2" -> programme := 2
-  | "3" -> programme := 3
-  | "4" -> programme := 4
+  | "1" -> prog := Prog.prog1 ()
+  | "2" -> prog := Prog.prog2 ()
+  | "3" -> prog := Prog.prog3 ()
+  | "4" -> prog := Prog.prog4 ()
   | _ ->  Printf.printf "lololo"
 ;;
 

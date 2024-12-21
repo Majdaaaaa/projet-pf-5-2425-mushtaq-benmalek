@@ -1,10 +1,9 @@
 open Graphics;;
 open Format;;
-open Prog;;
 open Pf5.Interp;;
 
 
-let prog = ref [] ;;
+(* let det_prog = ref [];; *)
 
 let rec list_nth l k = 
   match l with 
@@ -26,18 +25,25 @@ let print_programme prog =
   | Either _ -> Printf.printf "Either\n"
 ;;
 
+let not_detereministic p = 
+  let lp = all_choices p in 
+  let rand = Random.int (list_length lp) in 
+  prog := list_nth lp rand 
+;;
+
 let abs i () =
-  if !is_abs then
+  if !is_abs && (is_deterministic !prog = false) then (
+    not_detereministic !prog;
     let list = (!prog) in 
     let size = list_length list in
     if i<size then
       if i = -1 then Abs.draw_abs !rect 
       else
         let programme = list_nth list i in
-        Printf.printf "i = %d\n" i;
-        print_programme programme;
+        (* Printf.printf "i = %d\n" i;
+           print_programme programme; *)
         (* Printf.printf "La taille de la liste est %d\n" size; *)
-        Abs.run_abs [programme] rect
+        Abs.run_abs [programme] rect)
 ;;
 
 (* let ae i () =
@@ -51,7 +57,6 @@ let abs i () =
 
 
 let bc ()= 
-  (* Printf.printf "w : %d , h : %d\n" !w !h; *)
   if !is_bc then 
     let c = rgb !bc_r !bc_v !bc_b in
     if check_color !bc_r && check_color !bc_v && check_color !bc_b then (
@@ -78,17 +83,12 @@ let pc () =
 ;;
 
 let cr i () =
-  if !is_abs = false || (!is_abs && !is_cr) then 
-    if is_deterministic !prog then 
-      Cr.run (!prog) i
-    else 
-      let lp = all_choices !prog in
-      let rec aux j = 
-        if j < list_length lp then 
-          let prog = list_nth lp j in
-          Cr.run prog i;
-          aux (j+1)
-      in aux 0
+  try
+    if !is_abs = false || (!is_abs && !is_cr) then 
+      not_detereministic !prog ;
+    Cr.run !prog i
+  with 
+  | Cr.Fin -> raise Cr.Fin
 ;;
 
 let size () = 
@@ -101,15 +101,6 @@ let rc() =
   if !is_rc then 
     let c = rgb !rc_r !rc_v !rc_b in
     set_color c
-;;
-
-let choix_prog () = 
-  match !programme with 
-  |1-> prog := prog1 ()
-  |2-> prog := prog2 ()
-  |3-> prog := prog3 ()
-  |4-> prog := prog4 ()
-  |_ -> Printf.printf "lololo"
 ;;
 
 (* let abs() =

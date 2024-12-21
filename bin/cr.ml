@@ -1,6 +1,7 @@
 open Graphics;;
 open Pf5.Geo;;
 open Pf5.Interp;;
+exception Fin;;
 
 let rec list_length l = 
   match l with 
@@ -26,14 +27,10 @@ let dessin prog i =
     let p_y = (Float.to_int p.y) in
     let x = mid_x + ((p_x) * sx) in
     let y = mid_y + ((p_y) * sy) in 
-    Printf.printf "Plotting at: (%d, %d)\n" x y;
-    Printf.printf "x = [%d] ,  y =[%d]\n"  p_x p_y;
-    fill_circle x y ((max sx sy)/10);;
+    fill_rect x y 5 5;
+  else 
+    raise Fin;;
 
 let run prog i =
   dessin prog i
 ;;
-
-(* let run_ligne prog = 
-   let points = point prog in 
-   List.iter (fun p -> lineto (int_of_float p.x) (int_of_float p.y)) points;; *)
