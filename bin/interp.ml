@@ -18,7 +18,7 @@ let () =
       Arg.parse Format.speclist Format.anon_fun Format.usage_msg; 
     if !programme = 0 then 
       raise Arg;
-    Option.size();
+    Option.size ();
     Option.choix_prog ();
     Option.bc ();
     (*? changement de la couleur de l'avant plan pour dessiner le repère *)
@@ -39,7 +39,7 @@ let () =
       if eve.key = 's' then (
         (* Tout affiché direct au lieu d'appuyer sur N 30 fois*)
         (* let prog_length = Cr.list_length !programme in *)
-        while !i < 360 do (
+        while !i < 2000 do (
           (* Printf.printf "prog_length %d\n" prog_length ; *)
           Option.cr !i ();
           i := !i+1;
