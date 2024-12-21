@@ -1,6 +1,5 @@
 open Graphics;;
 open Pf5.Geo;;
-open Prog;;
 
 
 (* BC *)
@@ -44,7 +43,7 @@ let rc_b = ref 0;;
 let is_rc = ref false;;
 
 (* PROGRAM*)
-let programme = ref [];;
+let programme = ref 0;;
 
 let tuple_color = Arg.Tuple[
     Arg.Int (fun r -> Printf.printf "Rouge : %d\n" r);
@@ -166,9 +165,9 @@ let speclist = [
 
 let anon_fun arg = 
   match arg with
-  | "1" ->  programme := prog1 ()
-  | "2" -> programme :=  prog2 ()
-  | "3" ->  programme :=  prog3 ()
+  | "1" ->  programme := 1
+  | "2" -> programme :=  2
+  | "3" ->  programme :=  3
   | _ ->  Printf.printf "lololo"
 ;;
 

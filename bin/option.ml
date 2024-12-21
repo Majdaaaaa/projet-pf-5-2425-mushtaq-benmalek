@@ -1,7 +1,9 @@
 open Graphics;;
 open Format;;
 open Pf5.Interp;;
+open Prog;;
 
+let prog = ref [] ;;
 
 (* let prog() = 
    let mid_x = (float_of_int (size_x ())) /. 2. in 
@@ -92,7 +94,7 @@ let pc () =
 
 let cr i () =
   if !is_abs = false || (!is_abs && !is_cr) then 
-    Cr.run (!programme) i
+    Cr.run (!prog) i
 ;;
 
 let size () = 
@@ -109,6 +111,14 @@ let rc() =
     let c = rgb !rc_r !rc_v !rc_b in
     set_color c
 ;;
+
+let choix_prog () = 
+  if !programme <> 0 then 
+    match !programme with 
+    |1 -> prog := prog1 ()
+    |2-> prog := prog2 ()
+    |3-> prog := prog3 ()
+  ;;
 
 (* let abs() =
    if !is_abs then 

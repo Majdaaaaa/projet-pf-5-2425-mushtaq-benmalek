@@ -19,6 +19,7 @@ let () =
     if !programme = [] then 
       raise Arg;
     Option.size();
+    Option.choix_prog ();
     Option.bc ();
     (*? changement de la couleur de l'avant plan pour dessiner le repère *)
     Option.fc ();
