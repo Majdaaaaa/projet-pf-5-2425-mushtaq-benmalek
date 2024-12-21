@@ -31,6 +31,7 @@ let () =
         Option.pc ();
         Option.cr !i ();
         Option.abs !j ();
+        Option.ae !i ();
         i := !i+1;
         j := !j+1;
       );

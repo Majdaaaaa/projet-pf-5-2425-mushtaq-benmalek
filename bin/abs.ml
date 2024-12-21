@@ -3,7 +3,7 @@ open Pf5.Geo;;
 open Pf5.Approx;;
 
 
-  let draw_abs rect =
+  let draw_rect rect =
     let origine = ( size_x () / 2 , size_y () / 2) in
     let int_x_min = fst origine + (int_of_float rect.x_min * (size_x()/19)) in
     let int_y_min = snd origine + (int_of_float rect.y_min * (size_y()/19)) in
@@ -16,35 +16,8 @@ open Pf5.Approx;;
 
 let run_abs prog rect =
     rect := over_approximate prog !rect;
-    draw_abs !rect;
+    draw_rect !rect;
 ;;
-
-(* let run_abs prog rect i =
-    (* if i = 0 then draw_abs !rect; *)
-    rect := over_approximate prog !rect;
-    draw_abs !rect;
-;;  *)
-
-(* let run_abs prog rect =
-    let rec aux prog() rect =
-        match prog with
-            | [] -> draw_abs !rect;
-            | a::w ->
-                draw_abs !rect; 
-                let val_rect = !rect in
-                rect := over_approximate a val_rect;
-                aux w rect
-    in aux prog() rect
-;; *)
-
-
-
-
-(* let run_abs prog rect =
-    let res = over_approximate prog rect
-    in draw_abs res
-;; *)
-
 
 (* DEBUG *)
 (* let printf_rect rect = 
