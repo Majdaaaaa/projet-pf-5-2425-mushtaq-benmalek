@@ -1,9 +1,6 @@
 exception Quit;;
 open Graphics;;
 open Format;;
-exception Arg;;
-
-(* open_graph " 800x600";; *)
 
 let i = ref 0;;
 let j = ref (-1);;
@@ -11,6 +8,7 @@ let j = ref (-1);;
 let drawing () = 
   Option.rc();
   Option.abs !j ();
+  Option.ae !i ();
   Option.pc ();
   Option.cr !i  ();
   i := !i+1;
@@ -26,8 +24,7 @@ let () =
       raise Quit;
     ) else 
       Arg.parse Format.speclist Format.anon_fun Format.usage_msg; 
-    if !prog = [] then 
-      raise Arg;
+    condition();
     Option.size ();
     Option.bc ();
     (*? changement de la couleur de l'avant plan pour dessiner le repère *)
@@ -51,3 +48,9 @@ let () =
   with 
   | Quit -> close_graph ()
   | Arg -> Printf.printf "Il faut un programme a éxécuté\n"; close_graph ()
+  | Not_in_rectangle -> Printf.printf "La coordonnée (0.0, 0.0) n'est pas dans le rectangle donnée.\n"
+  | Abs_ae_exception -> Printf.printf "Les options -ae et -abs ne peuvent pas s'éxecuter en même temps.\n"
+  | Rc_only -> Printf.printf "L'option -rc doit être utiliser avec l'option -abs ou -ae.\n"
+  | Not_color -> Printf.printf "Ce n'est pas une couleur valide.\n"
+
+  (* "Choissisez entre le programme 1,2,3 ou 4 "*)

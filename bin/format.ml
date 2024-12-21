@@ -1,7 +1,13 @@
-open Graphics;;
+(* open Graphics;; *)
 open Pf5.Geo;;
+open Prog;;
+exception Not_in_rectangle;;
+exception Arg;;
+exception Abs_ae_exception;;
+exception Rc_only;;
+exception Not_color;;
 
-
+let point_origine = ref {x=0. ; y=0.} ;;
 (* BC *)
 let bc_r = ref 0;;
 let bc_v = ref 0;;
@@ -28,7 +34,7 @@ let w = ref 800;;
 let h = ref 600;;
 let is_size = ref false;;
 
-(* ABS : juste poue testé le fait que si y'a que abs activé les points sont plus là *)
+(* ABS *)
 let is_abs = ref false;;
 let x_min = ref 0.
 let x_max = ref 0.
@@ -39,7 +45,7 @@ let rect = ref {x_min = 0.; x_max = 0.; y_min = 0. ; y_max = 0.};;
 (* AE *)
 let is_ae = ref false;;
 
-(* RC*)
+(* RC *)
 let rc_r = ref 0;;
 let rc_v = ref 0;;
 let rc_b = ref 0;;
@@ -54,20 +60,20 @@ let tuple_color = Arg.Tuple[
     Arg.Int (fun b -> Printf.printf "Bleu : %d\n" b);
   ]
 
-let printf_rect() = 
-  Printf.printf "de rect x_min = %f\n" !rect.x_min;
-  Printf.printf "de rect y_min = %f\n" !rect.y_min;
-  Printf.printf "de rect x_max = %f\n" !rect.x_max;
-  Printf.printf "de rect y_max = %f\n" !rect.y_max;
-  let point = {x=0. ; y=0.} in
-  if in_rectangle !rect point then Printf.printf "est ce que la coordonnée (%f,%f)  est ici : %s\n" 0. 0. (string_of_bool (in_rectangle !rect point))
-  else
+(* let printf_rect() = 
+   Printf.printf "de rect x_min = %f\n" !rect.x_min;
+   Printf.printf "de rect y_min = %f\n" !rect.y_min;
+   Printf.printf "de rect x_max = %f\n" !rect.x_max;
+   Printf.printf "de rect y_max = %f\n" !rect.y_max;
+   let point = {x=0. ; y=0.} in
+   if in_rectangle !rect point then Printf.printf "est ce que la coordonnée (%f,%f)  est ici : %s\n" 0. 0. (string_of_bool (in_rectangle !rect point))
+   else
     close_graph(); Printf.printf "la coordonnée (%f,%f) est pas inclut dans le rect\n" 0. 0.;
-;;
+   ;; *)
 
 let print_abs()=
   rect:= { x_min = !x_min ; x_max = !x_max ; y_min = !y_min ; y_max = !y_max };
-  printf_rect();
+  (* printf_rect(); *)
   (* Printf.printf "de abs x_min = %f\n" !x_min;
      Printf.printf "de abs y_min = %f\n" !y_min;
      Printf.printf "de abs x_max = %f\n" !x_max;
@@ -94,13 +100,6 @@ let abs = Arg.Tuple[
     Arg.Float (fun ymax -> y_max := ymax);
     Arg.Unit (fun () -> 
         rect := { x_min = !x_min; x_max = !x_max; y_min = !y_min; y_max = !y_max });
-    (* Arg.Set_float x_min;
-       Arg.Set_float y_min;
-       Arg.Set_float x_max;
-       Arg.Set_float y_max;
-       Arg.Unit (fun () -> Printf.printf "j'affecte mes val\n"); *)
-    (* Arg.Unit  (fun () -> print_abs()); *)
-    (* Arg.Unit (fun () -> run_abs rect); *)
     Arg.Set is_abs;
   ]
 
@@ -130,7 +129,6 @@ let pc =
 ;;
 
 let size = 
-  Printf.printf "size est activé \n";
   Arg.Tuple [
     Arg.Set_int w;
     Arg.Set_int h;
@@ -159,87 +157,61 @@ let ae = Arg.Tuple[
 
 
 let speclist = [
-  ("-abs",tuple_abs,"Affichage de rectangles et approximation initiale");
-  ("-cr", Arg.Set is_cr,"Affichage des points");
-  ("-bc", bc , "Couleur de l'arrière-plan");
-  ("-fc", fc, "Couleur de l’avant plan");
-  ("-rc", rc, "Couleur du rectangle");
-  ("-pc", pc, "Couleur du point");
-  ("-ae", ae , "Approximation qui scinde le Either");
-  ("-size",size,"Dimension de la fenêtre en pixels avec W = largeur, H = hauteur");
+  ("-abs",abs,"x_min y_min x_max y_max -> Affichage de rectangles et approximation initiale");
+  ("-cr", Arg.Set is_cr,"-> Affichage des points");
+  ("-bc", bc , "r v b -> Couleur de l'arrière-plan");
+  ("-fc", fc, "r v b -> Couleur de l’avant plan");
+  ("-rc", rc, "r v b : Couleur du rectangle");
+  ("-pc", pc, "r v b : Couleur du point");
+  ("-ae", ae , "-> Approximation qui scinde le Either");
+  ("-size",size,"w h -> Dimension de la fenêtre en pixels avec W = largeur, H = hauteur");
 ]
-
-
-(* let anon_fun arg = 
-   match arg with
-   | "1" -> (fun () -> programme := prog1 )
-   | "2" -> (fun () -> programme := prog2 )
-   | "3" -> (fun () -> programme := prog3 )
-   | _ ->   (fun () -> programme := prog1 ) *)
-
 
 let anon_fun arg = 
   match arg with
-  | "1" -> prog := Prog.prog1 ()
-  | "2" -> prog := Prog.prog2 ()
-  | "3" -> prog := Prog.prog3 ()
-  | "4" -> prog := Prog.prog4 ()
-  | _ ->  Printf.printf "lololo"
+  | "1" -> prog := prog1 ()
+  | "2" -> prog := prog2 ()
+  | "3" -> prog := prog3 ()
+  | "4" -> prog := prog4 ()
+  | _ ->  Printf.printf "Ce n'est pas un programme.\n"
 ;;
 
 
 let usage_msg = "inter ...  Option disponible :";;
 
+let check_color r g b  = if r >= 0 && r < 256  && g >= 0 && g < 256 && b >= 0 && b < 256 then true else false 
 
-(* TODO rattrapper les exceptions pr close graphe *)
+let condition() =
+  if !prog =[] then raise Arg;
+  if in_rectangle !rect !point_origine = false then raise Not_in_rectangle;
+  if !is_ae = true && !is_abs = true  then raise Abs_ae_exception;
+  if !is_rc = true && !is_abs = false && !is_ae = false then raise Rc_only;
 
+  if !is_bc = true && check_color !bc_r !bc_b !bc_v = false  then raise Not_color;
+  if !is_rc = true && check_color !rc_r !rc_b !rc_v = false  then raise Not_color;
+  if !is_fc = true && check_color !fc_r !fc_b !fc_v = false  then raise Not_color;
+  if !is_pc = true && check_color !pc_r !pc_b !pc_v = false  then raise Not_color;
 
-
-
-
-
-
-
-
-
-
-
-
-
+  (* TODO rattrapper les exceptions pr close graphe *)
 
 
+  (* DEBUGGAGE *)
+  (* let printf_rect() = 
+     Printf.printf "de rect x_min = %f\n" !rect.x_min;
+     Printf.printf "de rect y_min = %f\n" !rect.y_min;
+     Printf.printf "de rect x_max = %f\n" !rect.x_max;
+     Printf.printf "de rect y_max = %f\n" !rect.y_max;
+     let point = {x=0. ; y=0.} in
+     if in_rectangle !rect point then Printf.printf "est ce que la coordonnée (%f,%f)  est ici : %s\n" 0. 0. (string_of_bool (in_rectangle !rect point))
+     else
+      close_graph(); Printf.printf "la coordonnée (%f,%f) est pas inclut dans le rect\n" 0. 0.;
+     ;;
 
-
-
-
-
-
-
-
-
-(* let tuple_abs = Arg.Tuple[
-    Arg.Float (fun x_min -> 
-      try
-      Printf.printf "x_min = %f\n" x_min
-      with 
-      | Arg.Bad  s -> Printf.printf "mauvais argument donné %s" s
-    );
-
-    Arg.Float (fun y_min ->
-      try
-      Printf.printf "y_min = %f\n" y_min
-    with 
-    | Arg.Bad  s -> Printf.printf "mauvais argument donné %s" s
-      );
-    Arg.Float (fun x_max -> 
-      try
-      Printf.printf "x_max = %f\n" x_max
-    with 
-    | Arg.Bad  s -> Printf.printf "mauvais argument donné %s" s
-      );
-    Arg.Float (fun y_max -> 
-      try Printf.printf "y_max = %f\n" y_max
-    with 
-    | Arg.Bad  s -> Printf.printf "mauvais argument donné %s" s
-      );
-   ]  *)
+     let print_abs()=
+     rect:= { x_min = !x_min ; x_max = !x_max ; y_min = !y_min ; y_max = !y_max };
+     (* printf_rect(); *)
+     (* Printf.printf "de abs x_min = %f\n" !x_min;
+       Printf.printf "de abs y_min = %f\n" !y_min;
+       Printf.printf "de abs x_max = %f\n" !x_max;
+       Printf.printf "de abs y_max = %f\n" !y_max; *)
+     ;; *)
