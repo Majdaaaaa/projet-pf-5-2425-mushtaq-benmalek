@@ -142,23 +142,12 @@ let prog () =
   (* let mid_x = 0.0 in *)
   let mid_y = 0.0 in
   [
-    Repeat(5, [Move(Translate {x = !rect.x_min -. 2. ; y = mid_y })] );
-    (* Point dans le premier quadrant (x > 0, y > 0) *)
-    (* Move (Translate {x = mid_x +. 5.0; y = mid_y +. 5.0}); *)
-    
-    (* Point dans le deuxième quadrant (x < 0, y > 0) *)
-    (* Move (Translate {x = mid_x -. 2.0; y = mid_y +. 2.0}); *)
-    (* Point dans le troisième quadrant (x < 0, y < 0) *)
-    (* Move (Translate {x = mid_x -. 5.0; y = mid_y -. 5.0}); *)
-    (* Point dans le quatrième quadrant (x > 0, y < 0) *)
-    (* Move (Translate {x = mid_x +. 3.0; y = mid_y +. 3.0}); *)
-    (* Retour au centre *)
-    (* Move (Translate {x = -.mid_x; y = -.mid_y}); *)
+    Repeat(4, [Move(Translate {x = !rect.x_min -. 2. ; y = mid_y })] );
   ]
 ;; *)
 
 (* PROGRAMME POUR LE EITHER *)
-let prog () =
+(* let prog () =
   let mid_x = 0.0 in
   let mid_y = 0.0 in
   [
@@ -177,9 +166,19 @@ let prog () =
     (* Retour au centre *)
     (* Move (Translate {x = -.mid_x; y = -.mid_y}); *)
   ]
-;; 
+;;  *)
 
-
+(* let prog() = [Repeat (1, [
+  Either (
+    [Move(Translate {x = 1.; y = 0.})],
+    [Move(Translate {x = -1.; y = 0.})]
+    );
+  Either (
+    [Move(Translate {x = 0.; y = 1.})],
+    [Move(Translate {x = 0.; y = -1.})]
+    )      ]
+)]
+;; *)
   
 
   let rec list_nth l k = 
