@@ -3,7 +3,7 @@ open Graphics;;
 open Format;;
 exception Arg;;
 
-open_graph " 800x600";;
+(* open_graph " 800x600";; *)
 
 let i = ref 0;;
 
@@ -16,7 +16,7 @@ let () =
       raise Quit;
     ) else 
       Arg.parse Format.speclist Format.anon_fun Format.usage_msg; 
-    if !programme = [] then 
+    if !programme = 0 then 
       raise Arg;
     Option.size();
     Option.choix_prog ();
@@ -35,7 +35,7 @@ let () =
         Option.abs !i ();
         i := !i+1;
       );
-      if eve.key = 's' then (
+      (* if eve.key = 's' then (
         (* Tout affiché direct au lieu d'appuyer sur N 30 fois*)
         (* let prog_length = Cr.list_length !programme in *)
         while !i < 360 do (
@@ -44,11 +44,11 @@ let () =
           i := !i+1;
         )
         done 
-      );
-      if eve.key = 'l' then (
+      ); *)
+      (* if eve.key = 'l' then (
         if !is_abs = false then 
           Cr.run_ligne !programme
-      );
+      ); *)
       (* ? rétablir la couleur de l'avant plan demandé *)
       Option.fc ();
     done

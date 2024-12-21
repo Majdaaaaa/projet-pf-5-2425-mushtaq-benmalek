@@ -11,7 +11,7 @@ open Pf5.Approx;;
     let int_y_max = snd origine + (int_of_float rect.y_max * (size_y()/19)) in
     let w = (int_x_max - int_x_min) in
     let h = (int_y_max - int_y_min ) in
-    fill_rect int_x_min int_y_min w h
+    draw_rect int_x_min int_y_min w h
 ;;
 
 

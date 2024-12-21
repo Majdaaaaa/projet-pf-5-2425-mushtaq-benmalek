@@ -1,45 +1,10 @@
 open Graphics;;
 open Format;;
-open Pf5.Interp;;
 open Prog;;
+open Pf5.Interp;;
+
 
 let prog = ref [] ;;
-
-(* let prog() = 
-   let mid_x = (float_of_int (size_x ())) /. 2. in 
-   let mid_y =  (float_of_int (size_y ())) /. 2. in 
-   (*Carré*)
-   [
-   Repeat (4, [
-       Move (Translate {x = 1.0*.42.10526316; y = 0.0*.52.63157895});  
-       Move (Rotate ({x = mid_x; y = mid_y}, 90.0))  
-     ])
-   ];;  *)
-
-let prog () =
-  let mid_x = (float_of_int (size_x ())) /. 2. in
-  let mid_y = (float_of_int (size_y ())) /. 2. in
-  [
-    (* Répète 4 fois pour tracer un carré *)
-    Repeat (4, [
-        Move (Translate {x = 1.0 *. 100.0; y = 0.0});  (* Déplace horizontalement *)
-        Move (Rotate ({x = mid_x; y = mid_y}, 90.0))  (* Tourne autour du centre *)
-      ]);
-    (* Répète 3 fois pour tracer un triangle équilatéral *)
-    Repeat (3, [
-        Move (Translate {x = 1.0 *. 75.0; y = 0.0});  (* Déplace horizontalement *)
-        Move (Rotate ({x = mid_x; y = mid_y}, 120.0)) (* Tourne autour du centre *)
-      ]);
-    (* Déplacement diagonal *)
-    Move (Translate {x = 50.0; y = 50.0});
-    (* Rotation autour d'un point spécifique *)
-    Move (Rotate ({x = mid_x +. 50.0; y = mid_y +. 50.0}, 45.0));
-    (* Retour au centre *)
-    Move (Translate {x = -.mid_x; y = -.mid_y});
-  ]
-;;
-
-
 
 let rec list_nth l k = 
   match l with 
@@ -56,7 +21,7 @@ let rec list_length l =
 
 let abs i () =
   if !is_abs then
-    let list = prog () in 
+    let list = (unfold_repeat !prog) in 
     let size = list_length list in
     if i<size then
       let programme = list_nth list i in
@@ -64,6 +29,16 @@ let abs i () =
       Printf.printf "La taille de la liste est %d\n" size;
       Abs.run_abs [programme] rect 
 ;;
+
+(* let ae i () =
+   if !is_ae = true && !is_abs = true then close_graph();
+   else
+   if !is_ae then
+    let list = prog() in 
+    let size = list_nth i in
+    if i < size then
+      let list_rect =  *)
+
 
 let bc ()= 
   (* Printf.printf "w : %d , h : %d\n" !w !h; *)
@@ -113,12 +88,13 @@ let rc() =
 ;;
 
 let choix_prog () = 
-  if !programme <> 0 then 
-    match !programme with 
-    |1 -> prog := prog1 ()
-    |2-> prog := prog2 ()
-    |3-> prog := prog3 ()
-  ;;
+  match !programme with 
+  |1-> prog := prog1 ()
+  |2-> prog := prog2 ()
+  |3-> prog := prog3 ()
+  |4-> prog := prog4 ()
+  |_ -> Printf.printf "lololo"
+;;
 
 (* let abs() =
    if !is_abs then 
