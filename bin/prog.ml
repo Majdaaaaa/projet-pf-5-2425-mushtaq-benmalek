@@ -2,6 +2,9 @@ open Graphics ;;
 open Pf5.Geo;;
 open Pf5.Interp;;
 
+let x () = float_of_int (size_x () /19);;
+let y () = float_of_int (size_y () /19);;
+
 let prog1 () = 
   let mid_x = (float_of_int (size_x ())) /. 2. in 
   let mid_y =  (float_of_int (size_y ())) /. 2. in 
@@ -34,14 +37,31 @@ let prog3 () =
       ])
   ]
 ;;
-let prog5 () =
+
+(* let prog4 () =
+   let mid_x = (float_of_int (size_x ())) /. 2. in
+   let mid_y = (float_of_int (size_y ())) /. 2. in
+   moveto (int_of_float mid_x) (int_of_float mid_y) ;
+   let (x,y) = current_point () in 
+   let fx = (float_of_int x )in 
+   let fy = (float_of_int y ) in 
+   [
+    Repeat (10, [
+        Move (Translate {x = 30. ; y=30.});
+        Move (Rotate ({x= fx ; y= fy }, 36.))
+      ])
+   ];; *)
+
+let prog4 () =
   let mid_x = (float_of_int (size_x ())) /. 2. in
   let mid_y = (float_of_int (size_y ())) /. 2. in
-  (* Spirale *)
+  moveto (int_of_float mid_x) (int_of_float mid_y) ;
   [
-    Repeat (360, [
-        Move (Translate {x = 20.0; y = 0.0});  
-        Move (Rotate ({x = mid_x; y = mid_y}, 10.0))  
+    Repeat (3,[
+        Move (Translate {x = 100.; y = 0. });
+        (* Move (Translate {x = 10.0; y = 10.0}); *)
+        Move (Rotate ({x = mid_x; y = mid_y}, 120.0));
+        (* Move (Translate {x = 10.0; y = 10.0}); *)
       ])
   ]
 ;;

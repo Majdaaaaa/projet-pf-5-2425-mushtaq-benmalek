@@ -91,11 +91,11 @@ let pc () =
 
 let cr i () =
   if !is_abs = false || (!is_abs && !is_cr) then 
-    if !programme <> [] then 
       Cr.run (!programme) i
 ;;
 
-let size() = 
+let size () = 
+  Printf.printf "w : %d , h : %d\n" !w !h;
   let res = " "^string_of_int !w^"x"^string_of_int !h in
   open_graph res
 ;;

@@ -127,6 +127,7 @@ let pc =
 ;;
 
 let size = 
+  Printf.printf "size est activé \n";
   Arg.Tuple [
     Arg.Set_int w;
     Arg.Set_int h;
@@ -165,7 +166,7 @@ let anon_fun arg =
   match arg with
   | "1" ->  programme := prog1 ()
   | "2" -> programme :=  prog2 ()
-  | "3" ->  programme :=  prog5 ()
+  | "3" ->  programme :=  prog4 ()
   | _ ->   close_graph ()
 ;;
 

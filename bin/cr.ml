@@ -38,7 +38,7 @@ let point prog =
 
 let run prog i = 
   let aux l  = 
-    if i < list_length l then 
+    if i < list_length l && i > 0  then 
       let x = (int_of_float ((list_nth l i).x)) in 
       let y = (int_of_float ((list_nth l i).y))
       in Printf.printf "Plotting at: (%d, %d)\n" x y;

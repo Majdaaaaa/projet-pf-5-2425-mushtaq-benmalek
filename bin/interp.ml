@@ -3,7 +3,7 @@ open Graphics;;
 open Format;;
 exception Arg;;
 
-open_graph " 800x600";;
+(* open_graph " 800x600";; *)
 
 let i = ref 0;;
 
@@ -36,9 +36,9 @@ let () =
       );
       if eve.key = 's' then (
         (* Tout affiché direct au lieu d'appuyer sur N 30 fois*)
-        let prog_length = Cr.list_length !programme in
-        while !i < 1000 do (
-          Printf.printf "prog_length %d\n" prog_length ;
+        (* let prog_length = Cr.list_length !programme in *)
+        while !i < 360 do (
+          (* Printf.printf "prog_length %d\n" prog_length ; *)
           Option.cr !i ();
           i := !i+1;
         )
