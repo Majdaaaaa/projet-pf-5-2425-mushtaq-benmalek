@@ -14,25 +14,24 @@ let prog1 () =
   ];;
 
 let prog2 () =
-  let mid_x = (float_of_int (size_x ())) /. 2. in
-  let mid_y = (float_of_int (size_y ())) /. 2. in
+  (* let mid_x = (float_of_int (size_x ())) /. 2. in
+  let mid_y = (float_of_int (size_y ())) /. 2. in *)
   [
     Repeat (3, [
         Move (Translate {x = 3.; y = 0.0});  
-        Move (Rotate ({x = mid_x; y = mid_y}, 120.0))  
+        Move (Rotate ({x = 0.; y = 0.}, 120.0))  
       ])
   ]
 ;;
 
 let prog3 () =
-  let mid_x = (float_of_int (size_x ())) /. 2. in
-  let mid_y = (float_of_int (size_y ())) /. 2. in
+  (* let mid_x = (float_of_int (size_x ())) /. 2. in
+  let mid_y = (float_of_int (size_y ())) /. 2. in *)
   [
     Repeat (5, [
         Move (Translate {x =2.; y = 0.0});  
-        Move (Rotate ({x = mid_x; y = mid_y}, 144.0))  
+        Move (Rotate ({x = 0.; y = 0.}, 90.0))  
       ]);
-    Move (Translate ({x=2. ; y= 3.}))
   ]
 ;;
 
@@ -60,11 +59,9 @@ let prog3 () =
 ;; *)
 
 let prog4 () =
-  let mid_x = 0.0 in
-  let mid_y = 0.0 in
   [
-    Either ([Move (Translate {x = mid_x +. 3.0; y = mid_y +. 3.0})] , [Move(Rotate ({x = mid_x ; y = mid_y} , 90.0 ))] )
-    
+    Either ([Move (Translate {x =  0. +. 3.0; y =  0.0})] , [Move(Rotate ({x = 0. ; y = 0.} , 90.0 ))] )
+  ]
     (* Repeat(5, [Move(Translate {x = !rect.x_min -. 2. ; y = mid_y })] ); *)
     (* Point dans le premier quadrant (x > 0, y > 0) *)
     (* Move (Translate {x = mid_x +. 5.0; y = mid_y +. 5.0}); *)
@@ -77,7 +74,6 @@ let prog4 () =
     (* Move (Translate {x = mid_x +. 3.0; y = mid_y +. 3.0}); *)
     (* Retour au centre *)
     (* Move (Translate {x = -.mid_x; y = -.mid_y}); *)
-  ]
 ;; 
 
 (* let prog4 () =

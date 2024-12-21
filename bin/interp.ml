@@ -36,7 +36,7 @@ let () =
         i := !i+1;
         j := !j+1;
       );
-      (* if eve.key = 's' then (
+      if eve.key = 's' then (
         (* Tout affiché direct au lieu d'appuyer sur N 30 fois*)
         (* let prog_length = Cr.list_length !programme in *)
         while !i < 360 do (
@@ -45,11 +45,7 @@ let () =
           i := !i+1;
         )
         done 
-      ); *)
-      (* if eve.key = 'l' then (
-        if !is_abs = false then 
-          Cr.run_ligne !programme
-      ); *)
+      );
       (* ? rétablir la couleur de l'avant plan demandé *)
       Option.fc ();
     done

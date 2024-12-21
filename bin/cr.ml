@@ -15,9 +15,7 @@ let rec list_nth l k =
 ;;
 
 let point prog =
-  let mid_x = (float_of_int (size_x ())) /. 2. in 
-  let mid_y =  (float_of_int (size_y ())) /. 2. in 
-  run prog {x=mid_x ; y=mid_y} ;;
+  run prog {x=0. ; y=0.} ;;
 
 let run prog i =
   let sx = size_x ()/19 in 
@@ -26,16 +24,13 @@ let run prog i =
   let mid_y =  size_y () / 2 in 
   let aux l  = 
     if i < list_length l  then 
-      let p_x = ref (int_of_float ((list_nth l i).x)) in 
-      let p_y = ref (int_of_float ((list_nth l i).y)) in
-      if !p_x < 0 then 
-        p_x := !p_x * (-1);
-      if !p_y < 0 then 
-        p_y := !p_y * (-1);
-      let x = ((!p_x - mid_x) * sx) + mid_x in
-      let y = ((!p_y - mid_y) * sy) + mid_y in
+      let p = list_nth l i in
+      let p_x = (int_of_float p.x) in 
+      let p_y = (int_of_float p.y) in
+      let x = mid_x + ((p_x) * sx) in
+      let y = mid_y + ((p_y) * sy) in 
       Printf.printf "Plotting at: (%d, %d)\n" x y;
-      Printf.printf "x = [%d] ,  y =[%d]\n"  (int_of_float ((list_nth l i).x)) (int_of_float ((list_nth l i).y));
+      Printf.printf "x = [%d] ,  y =[%d]\n"  p_x p_y;
       fill_circle x y ((max sx sy)/10);
   in aux (point prog)
 ;;
