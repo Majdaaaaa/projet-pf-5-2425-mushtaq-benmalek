@@ -1,3 +1,4 @@
+open Liste
 (* Code de la Section 3 du projet. *)
 
 type coord2D = {
@@ -86,6 +87,8 @@ let rectangle_of_list (pl : point list) : rectangle =
   [] -> {x_min=0.0; x_max=0.0; y_min=0.0; y_max=0.0}
   |[a] ->  {x_min=a.x; x_max=a.x; y_min=a.y; y_max=a.y}
   |_::_ -> 
-    let l_y = sort_y pl and l_x = sort_x pl and l_length = List.length pl in 
-    {x_min= (List.nth l_x 0).x; x_max=(List.nth l_x (l_length-1)).x; y_min=(List.nth l_y 0).y ; y_max= (List.nth l_y (l_length-1)).y}
+    let l_y = sort_y pl and l_x = sort_x pl in 
+    {x_min= (List.nth l_x 0).x; x_max=(last l_x).x; y_min=(List.nth l_y 0).y ; y_max= (last l_y).y}
+    (* let l_y = sort_y pl and l_x = sort_x pl and l_length = List.length pl in 
+    {x_min= (List.nth l_x 0).x; x_max=(List.nth l_x (l_length-1)).x; y_min=(List.nth l_y 0).y ; y_max= (List.nth l_y (l_length-1)).y} *)
 ;;

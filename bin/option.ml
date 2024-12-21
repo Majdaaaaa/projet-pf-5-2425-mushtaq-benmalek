@@ -2,24 +2,10 @@ open Graphics;;
 open Format;;
 open Prog;;
 open Pf5.Interp;;
-
+open Pf5.Liste;;
 let prog = ref [] ;;
 open Pf5.Approx;;
   
-
-  let rec list_nth l k = 
-    match l with 
-    |[] -> failwith "liste vide"
-    |[a] -> if k==0 then a else failwith "existe pas"
-    |a::w -> if k==0 then a else list_nth w (k-1)
-  ;;
-
-let rec list_length l = 
-  match l with 
-  |[] -> 0
-  |_::w -> 1 + list_length w
-;;
-
 let print_programme prog =
   match prog with
   | Move _ -> Printf.printf "Move\n"
