@@ -6,7 +6,7 @@ exception Arg;;
 (* open_graph " 800x600";; *)
 
 let i = ref 0;;
-
+let j = ref (-1);;
 let () =
   try
     let nbargs = Array.length Sys.argv in 
@@ -32,8 +32,9 @@ let () =
         (* ? pour dessiné les points de la couleur demandé *)
         Option.pc ();
         Option.cr !i ();
-        Option.abs !i ();
+        Option.abs !j ();
         i := !i+1;
+        j := !j+1;
       );
       (* if eve.key = 's' then (
         (* Tout affiché direct au lieu d'appuyer sur N 30 fois*)

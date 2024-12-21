@@ -36,13 +36,13 @@ let prog3 () =
   ]
 ;;
 
-let prog4 () =
+(* let prog4 () =
   let mid_x = (float_of_int (size_x ())) /. 2. in
   let mid_y = (float_of_int (size_y ())) /. 2. in
   [
     (* Répète 4 fois pour tracer un carré *)
     Repeat (4, [
-        Move (Translate {x = 1.0 *. 3.0; y = 0.0});  (* Déplace horizontalement *)
+        Move (Translate {x = 3.0; y = 0.0});  (* Déplace horizontalement *)
         Move (Rotate ({x = mid_x; y = mid_y}, 90.0))  (* Tourne autour du centre *)
       ]);
     (* Répète 3 fois pour tracer un triangle équilatéral *)
@@ -51,13 +51,34 @@ let prog4 () =
         Move (Rotate ({x = mid_x; y = mid_y}, 120.0)) (* Tourne autour du centre *)
       ]);
     (* Déplacement diagonal *)
-    Move (Translate {x = 5.0; y = 5.0});
+    Move (Translate {x = 1.0; y = 1.0});
     (* Rotation autour d'un point spécifique *)
-    Move (Rotate ({x = mid_x +. 5.0; y = mid_y +. 5.0}, 45.0));
+    Move (Rotate ({x = mid_x +. 1.0; y = mid_y +. 1.0}, 45.0));
     (* Retour au centre *)
     Move (Translate {x = 0.; y = 0.});
   ]
-;;
+;; *)
+
+let prog4 () =
+  let mid_x = 0.0 in
+  let mid_y = 0.0 in
+  [
+    Either ([Move (Translate {x = mid_x +. 3.0; y = mid_y +. 3.0})] , [Move(Rotate ({x = mid_x ; y = mid_y} , 90.0 ))] )
+    
+    (* Repeat(5, [Move(Translate {x = !rect.x_min -. 2. ; y = mid_y })] ); *)
+    (* Point dans le premier quadrant (x > 0, y > 0) *)
+    (* Move (Translate {x = mid_x +. 5.0; y = mid_y +. 5.0}); *)
+    
+    (* Point dans le deuxième quadrant (x < 0, y > 0) *)
+    (* Move (Translate {x = mid_x -. 2.0; y = mid_y +. 2.0}); *)
+    (* Point dans le troisième quadrant (x < 0, y < 0) *)
+    (* Move (Translate {x = mid_x -. 5.0; y = mid_y -. 5.0}); *)
+    (* Point dans le quatrième quadrant (x > 0, y < 0) *)
+    (* Move (Translate {x = mid_x +. 3.0; y = mid_y +. 3.0}); *)
+    (* Retour au centre *)
+    (* Move (Translate {x = -.mid_x; y = -.mid_y}); *)
+  ]
+;; 
 
 (* let prog4 () =
    let mid_x = (float_of_int (size_x ())) /. 2. in
