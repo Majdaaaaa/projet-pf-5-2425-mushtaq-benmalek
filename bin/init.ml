@@ -9,7 +9,7 @@ let init_graphics () =
   moveto 2 20;
   draw_string "Appuyez sur <Q> pour quitter.";
   moveto 2 35;
-  draw_string "Appuyez sur <L> pour afficher les traces.";
+  draw_string "Appuyez sur <S> pour afficher toute l'execution.";
   moveto 2 50;
   Repere.repere ();
 ;;

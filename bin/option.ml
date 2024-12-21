@@ -66,26 +66,20 @@ let bc ()=
 
 
 let fc () =
-  let basic = white in
   if !is_fc then
     let c = rgb !fc_r !fc_v !fc_b in
     set_color c; (* Change la valeur de Graphics.foreground, tout les dessins a partir de la seront fais de la couleur c *)
-  else 
-    set_color basic
 ;;
 
 let pc () =
   if !is_pc then
-    (* if check_color !pc_r && check_color !pc_v && check_color !pc_b then ( *)
       let c = rgb !pc_r !pc_v !pc_b in
       set_color c
-      (* ) *)
-
 ;;
 
 let cr i () =
   try
-    if !is_abs = false || (!is_abs && !is_cr) then 
+    if !is_abs = false || ((!is_abs=true) && (!is_cr=true)) then 
       not_detereministic !prog ;
     Cr.run !prog i
   with 
