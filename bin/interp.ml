@@ -6,6 +6,7 @@ open Graphics;;
   moveto x1 y1;
   lineto x2 y2;; *)
 let i = ref 0;;
+let j = ref (-1);;
 let () =
   try
     let nbargs = Array.length Sys.argv in
@@ -29,8 +30,9 @@ let () =
         (* ? pour dessiné les points de la couleur demandé *)
         Option.pc ();
         Option.cr !i ();
-        Option.abs !i ();
+        Option.abs !j ();
         i := !i+1;
+        j := !j+1;
       );
       (* ? rétablir la couleur de l'avant plan demandé *)
       Option.fc ();

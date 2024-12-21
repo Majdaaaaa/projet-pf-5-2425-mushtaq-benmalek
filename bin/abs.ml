@@ -14,11 +14,16 @@ open Pf5.Approx;;
     fill_rect int_x_min int_y_min w h
 ;;
 
-
 let run_abs prog rect =
     rect := over_approximate prog !rect;
-    draw_abs !rect
+    draw_abs !rect;
 ;;
+
+(* let run_abs prog rect i =
+    (* if i = 0 then draw_abs !rect; *)
+    rect := over_approximate prog !rect;
+    draw_abs !rect;
+;;  *)
 
 (* let run_abs prog rect =
     let rec aux prog() rect =
