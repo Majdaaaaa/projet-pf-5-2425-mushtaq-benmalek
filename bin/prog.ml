@@ -2,8 +2,8 @@ open Graphics ;;
 open Pf5.Geo;;
 open Pf5.Interp;;
 
-let x () = float_of_int (size_x () /19);;
-let y () = float_of_int (size_y () /19);;
+let x () = float_of_int (size_x ()/19);;
+let y () = float_of_int (size_y ()/19);;
 
 let prog1 () = 
   let mid_x = (float_of_int (size_x ())) /. 2. in 
@@ -32,7 +32,7 @@ let prog3 () =
   let mid_y = (float_of_int (size_y ())) /. 2. in
   [
     Repeat (5, [
-        Move (Translate {x = 1.0 *. 100.0; y = 0.0});  
+        Move (Translate {x = x (); y = 0.0});  
         Move (Rotate ({x = mid_x; y = mid_y}, 144.0))  
       ])
   ]
@@ -52,7 +52,7 @@ let prog3 () =
       ])
    ];; *)
 
-let prog4 () =
+(* let prog4 () =
   let mid_x = (float_of_int (size_x ())) /. 2. in
   let mid_y = (float_of_int (size_y ())) /. 2. in
   moveto (int_of_float mid_x) (int_of_float mid_y) ;
@@ -64,4 +64,4 @@ let prog4 () =
         (* Move (Translate {x = 10.0; y = 10.0}); *)
       ])
   ]
-;;
+;; *)

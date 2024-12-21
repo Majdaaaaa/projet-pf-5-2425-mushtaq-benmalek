@@ -3,22 +3,22 @@ open Graphics;;
 open Format;;
 exception Arg;;
 
-(* open_graph " 800x600";; *)
+open_graph " 800x600";;
 
 let i = ref 0;;
 
 let () =
-  Option.size();
   try
-    (* let nbargs = Array.length Sys.argv in 
-       if nbargs <= 1 then ( 
-       Option.cr !i ();
-       Printf.printf "Il faut donné un programme a éxécuté\n";
-       raise Quit;
-       )  *)
-    Arg.parse Format.speclist Format.anon_fun Format.usage_msg; 
+    let nbargs = Array.length Sys.argv in 
+    if nbargs <= 1 then ( 
+      Option.cr !i ();
+      Printf.printf "Il faut donné un programme a éxécuté\n";
+      raise Quit;
+    ) else 
+      Arg.parse Format.speclist Format.anon_fun Format.usage_msg; 
     if !programme = [] then 
       raise Arg;
+    Option.size();
     Option.bc ();
     (*? changement de la couleur de l'avant plan pour dessiner le repère *)
     Option.fc ();

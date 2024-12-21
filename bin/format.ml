@@ -27,6 +27,7 @@ let is_pc = ref false;;
 (* SIZE *)
 let w = ref 800;;
 let h = ref 600;;
+let is_size = ref false;;
 
 (* ABS : juste poue testé le fait que si y'a que abs activé les points sont plus là *)
 let is_abs = ref false;;
@@ -131,6 +132,7 @@ let size =
   Arg.Tuple [
     Arg.Set_int w;
     Arg.Set_int h;
+    Arg.Set is_size;
   ]
 ;;
 
@@ -166,8 +168,8 @@ let anon_fun arg =
   match arg with
   | "1" ->  programme := prog1 ()
   | "2" -> programme :=  prog2 ()
-  | "3" ->  programme :=  prog4 ()
-  | _ ->   close_graph ()
+  | "3" ->  programme :=  prog3 ()
+  | _ ->  Printf.printf "lololo"
 ;;
 
 
