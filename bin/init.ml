@@ -11,6 +11,5 @@ let init_graphics () =
   moveto 2 35;
   draw_string "Appuyez sur <L> pour afficher les traces.";
   moveto 2 50;
-  draw_string "Appuyez sur <S> pour afficher la fin du programme.";
   Repere.repere ();
 ;;

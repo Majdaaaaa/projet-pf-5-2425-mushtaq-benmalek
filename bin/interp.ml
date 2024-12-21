@@ -8,6 +8,15 @@ exception Arg;;
 let i = ref 0;;
 let j = ref (-1);;
 
+let drawing () = 
+  Option.rc();
+  Option.abs !j ();
+  Option.pc ();
+  Option.cr !i  ();
+  i := !i+1;
+  j := !j+1;
+  Option.fc ();
+;;
 
 let () =
   try
@@ -29,26 +38,15 @@ let () =
       if eve.key = 'q' then raise Quit;
       try
         if eve.key = 'n' then (
-          (* ? pour dessiné les points de la couleur demandé *)
-          Option.pc ();
-          Option.cr !i ();
-          Option.rc();
-          Option.abs !j ();
-          i := !i+1;
-          j := !j+1;
+          drawing ();
         );
         if eve.key = 's' then ( 
-            while true do
-              Option.cr !i  ();
-              Option.abs !j ();
-              i := !i+1;
-              j := !j+1;
-            done
+          while true do
+            drawing ();
+          done
         )
       with
       | Cr.Fin -> set_color red;  moveto 2 70 ; draw_string "Fin du programme";
-        (* ? rétablir la couleur de l'avant plan demandé *)
-        Option.fc ();
     done
   with 
   | Quit -> close_graph ()

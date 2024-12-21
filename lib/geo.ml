@@ -1,9 +1,9 @@
 (* Code de la Section 3 du projet. *)
 
 type coord2D = {
-    x : float;
-    y : float
-  }
+  x : float;
+  y : float
+}
 type point = coord2D
 type vector = coord2D
 type angle = float
@@ -11,6 +11,18 @@ type angle = float
 let translate (v : vector) (p : point) : point = 
   let new_x = p.x +. v.x and new_y = p.y +. v.y in
   {x=new_x ; y=new_y}
+;;
+
+let rec list_length l = 
+  match l with 
+  |[] -> 0
+  |_::w -> 1 + list_length w
+;;
+let rec list_nth l k = 
+  match l with 
+  |[] -> failwith "liste vide"
+  |[a] -> if k==0 then a else failwith "existe pas"
+  |a::w -> if k==0 then a else list_nth w (k-1)
 ;;
 let rad_of_deg (a : angle) : angle =
   let pi = 3.141592653589793 in 
@@ -27,30 +39,30 @@ let rotate (c : point) (alpha : angle) (p : point) : point =
   let rad_a = rad_of_deg alpha in 
   let new_x = c.x +. (p.x -. c.x) *. (cos rad_a) -. (p.y -. c.y) *. (sin rad_a) 
   and new_y = c.y +. (p.x -. c.x) *. (sin rad_a) +. (p.y -. c.y) *. (cos rad_a) 
-in {x=new_x ; y=new_y}
+  in {x=new_x ; y=new_y}
 ;;
-  
+
 type transformation =
-  Translate of vector
-| Rotate of point * angle
+    Translate of vector
+  | Rotate of point * angle
 
 let transform (t : transformation) (p : point) : point =
   match t with 
-  Translate v -> translate v p 
+    Translate v -> translate v p 
   |Rotate(c,a) -> rotate c a p
 ;;
 
 type rectangle = {
-    x_min : float;
-    x_max : float;
-    y_min : float;
-    y_max : float
-  }
+  x_min : float;
+  x_max : float;
+  y_min : float;
+  y_max : float
+}
 
 let in_rectangle (r : rectangle) (p : point) : bool =
   let test_x = p.x >= r.x_min && p.x <=  r.x_max 
   and test_y = p.y >= r.y_min && p.y <=  r.y_max 
-in test_x && test_y
+  in test_x && test_y
 ;;
 
 let corners (r :rectangle) : point list =
@@ -58,9 +70,9 @@ let corners (r :rectangle) : point list =
   and s_2 = {x=r.x_min; y= r.y_max}
   and s_3 = {x=r.x_max; y= r.y_min}
   and s_4 = {x=r.x_max; y= r.y_max}
-in s_1::s_2::s_3::s_4::[]
+  in s_1::s_2::s_3::s_4::[]
 ;;
-  
+
 let compare_x (p1 : point) (p2 : point) : int =
   if p1.x = p2.x then 0 
   else if p1.x > p2.x then 1
@@ -83,9 +95,9 @@ let sort_y (l : point list) : point list =
 
 let rectangle_of_list (pl : point list) : rectangle = 
   match pl with 
-  [] -> {x_min=0.0; x_max=0.0; y_min=0.0; y_max=0.0}
+    [] -> {x_min=0.0; x_max=0.0; y_min=0.0; y_max=0.0}
   |[a] ->  {x_min=a.x; x_max=a.x; y_min=a.y; y_max=a.y}
   |_::_ -> 
-    let l_y = sort_y pl and l_x = sort_x pl and l_length = List.length pl in 
-    {x_min= (List.nth l_x 0).x; x_max=(List.nth l_x (l_length-1)).x; y_min=(List.nth l_y 0).y ; y_max= (List.nth l_y (l_length-1)).y}
+    let l_y = sort_y pl and l_x = sort_x pl and l_length = list_length pl in 
+    {x_min= (list_nth l_x 0).x; x_max=(list_nth l_x (l_length-1)).x; y_min=(list_nth l_y 0).y ; y_max= (list_nth l_y (l_length-1)).y}
 ;;

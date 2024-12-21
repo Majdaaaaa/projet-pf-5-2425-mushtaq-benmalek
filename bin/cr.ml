@@ -3,19 +3,7 @@ open Pf5.Geo;;
 open Pf5.Interp;;
 exception Fin;;
 
-let rec list_length l = 
-  match l with 
-  |[] -> 0
-  |_::w -> 1 + list_length w
-;;
-let rec list_nth l k = 
-  match l with 
-  |[] -> failwith "liste vide"
-  |[a] -> if k==0 then a else failwith "existe pas"
-  |a::w -> if k==0 then a else list_nth w (k-1)
-;;
-
-let dessin prog i =
+let run prog i =
   let sx = size_x ()/19 in 
   let sy = size_y ()/19 in
   let mid_x = size_x () / 2 in 
@@ -30,7 +18,3 @@ let dessin prog i =
     fill_rect x y 5 5;
   else 
     raise Fin;;
-
-let run prog i =
-  dessin prog i
-;;

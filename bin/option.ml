@@ -2,9 +2,6 @@ open Graphics;;
 open Format;;
 open Pf5.Interp;;
 
-
-(* let det_prog = ref [];; *)
-
 let rec list_nth l k = 
   match l with 
   |[] -> failwith "liste vide"
@@ -30,9 +27,10 @@ let not_detereministic p =
   let rand = Random.int (list_length lp) in 
   prog := list_nth lp rand 
 ;;
+let stock_prog = ref (!prog);;
 
 let abs i () =
-  if !is_abs && (is_deterministic !prog = false) then (
+  if !is_abs && (is_deterministic !stock_prog = false) then (
     not_detereministic !prog;
     let list = (!prog) in 
     let size = list_length list in
@@ -40,9 +38,6 @@ let abs i () =
       if i = -1 then Abs.draw_abs !rect 
       else
         let programme = list_nth list i in
-        (* Printf.printf "i = %d\n" i;
-           print_programme programme; *)
-        (* Printf.printf "La taille de la liste est %d\n" size; *)
         Abs.run_abs [programme] rect)
 ;;
 
@@ -69,9 +64,12 @@ let bc ()=
 
 
 let fc () =
+  let basic = white in
   if !is_fc then
     let c = rgb !fc_r !fc_v !fc_b in
     set_color c; (* Change la valeur de Graphics.foreground, tout les dessins a partir de la seront fais de la couleur c *)
+  else 
+    set_color basic
 ;;
 
 let pc () =
@@ -102,17 +100,3 @@ let rc() =
     let c = rgb !rc_r !rc_v !rc_b in
     set_color c
 ;;
-
-(* let abs() =
-   if !is_abs then 
-   (* Abs.draw_abs !rect *)
-   Abs.run_abs (prog()) !rect 
-   ;; *)
-
-
-(*
-Printf.printf "dans abs()\n"; *)
-(* printf_rect(); *)
-(* Printf.printf "\n"; *)
-(* Abs.run_abs !rect
-*)
