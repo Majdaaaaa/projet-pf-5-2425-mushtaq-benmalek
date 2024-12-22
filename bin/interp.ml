@@ -7,6 +7,7 @@ open Pf5.Geo;;
 let i = ref 0;;
 let j = ref (-1);;
 let copie_rect = ref {x_min = 0.; y_min = 0. ; x_max = 0. ; y_max = 0.};;
+let continue = ref true;;
 
 (** [drawing] appelle toutes les fonctions qui servent à afficher les affichages des options demandées par l'utilisateur.
 *)
@@ -41,7 +42,9 @@ let prog_fini () =
   moveto 10 (size_y ()-20);
   draw_string "Programme fini.";
   moveto 10 (size_y ()-35);
-  draw_string "Appuyez sur <1> ou <2> ou <3> ou <4> pour choisir un nouveau programme a executer." ;
+  draw_string "Appuyez sur <U> ou <D> ou <T> ou <F> pour choisir un nouveau programme a executer." ;
+  moveto 10 (size_y ()-50);
+  draw_string "Appuyez sur n'importe quelle touche pour re-executer le meme programme." ;
   Option.fc ();;
 
 (** [main] appelle toute les fonctions des options, du repère et [drawing], ainsi que le parsing.
@@ -62,10 +65,10 @@ let rec main () =
   Option.fc ();
   Init.init_graphics ();
   Option.not_detereministic !prog;
-  while true do
+  while !continue do
     let eve = wait_next_event [Key_pressed] in 
     if eve.key = 'q' then raise Quit;
-    try
+    try (
       if eve.key = 'n' then (
         drawing ();
       );
@@ -73,15 +76,17 @@ let rec main () =
         while true do
           drawing ();
         done
-      );
-    with
+      );)
+    with 
     | Cr.Fin -> (
         prog_fini ();
         handler_ex ();
+        continue := false;
       )
     | Option.Deter -> (
         choix_abs ();
         handler_ex ();
+        continue := false;
       )
   done
 
@@ -98,18 +103,17 @@ and choix_prog key =
   i := 0;
   j := (-1);
   match key with
-  | '1' -> prog := prog1 (); clear_graph (); main ()
-  | '2' -> prog := prog2 (); clear_graph (); main ()
-  | '3' -> prog := prog3 (); clear_graph (); main ()
-  | '4' -> prog := prog4 (); clear_graph (); main ()
+  | 'u' -> prog := prog1 (); clear_graph (); continue := true ;main ()
+  | 'd' -> prog := prog2 (); clear_graph (); continue := true ;main ()
+  | 't' -> prog := prog3 (); clear_graph (); continue := true ;main ()
+  | 'f' -> prog := prog4 (); clear_graph (); continue := true ;main ()
   | 'q' -> raise Quit 
-  | _ -> ()
+  | _ -> continue := true ; main ()
 ;;
-
 
 let () =
   try
-    main ();
+    main ()
   with 
   | Quit -> close_graph ()
   | Arg -> Printf.printf "Il faut un programme à éxécuter\n"; close_graph ()
