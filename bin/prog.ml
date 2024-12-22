@@ -118,7 +118,7 @@ let prog4 () =
 (* Move (Translate {x = mid_x +. 3.0; y = mid_y +. 3.0}); *)
 (* Retour au centre *)
 (* Move (Translate {x = -.mid_x; y = -.mid_y}); *)
-;; 
+(* ;;  *)
 
 (* let prog4 () =
    let mid_x = (float_of_int (size_x ())) /. 2. in
@@ -150,7 +150,7 @@ let prog4 () =
 
 (* PROG TEST POUR TRANSLATE*)
 
-let prog8 () =
+(* let prog1 () =
   let mid_x = 0.0 in
   let mid_y = 0.0 in
   [
@@ -165,7 +165,150 @@ let prog8 () =
     (* Retour au centre *)
     (* Move (Translate {x = -.mid_x; y = -.mid_y}); *)
   ]
+;; *)
+(* 
+let prog1() =
+  [Repeat(5,  [Move(Translate{x = 1.0 ; y = 1.0})]  )]
+;; *)
+
+
+(* let prog1() =
+  [   Move(Translate{x = 1.0 ; y = 1.0});
+      Move(Translate{x = 1.0 ; y = 1.0});
+      Move(Translate{x = 1.0 ; y = 1.0});
+      Move(Translate{x = 1.0 ; y = 1.0});
+      Move(Translate{x = 1.0 ; y = 1.0});
+      Move(Translate{x = 1.0 ; y = 1.0});
+      Move(Translate{x = 1.0 ; y = 1.0});
+      Move(Translate{x = 1.0 ; y = 1.0});
+      (* Move(Translate{x = 1.0 ; y = 1.0}) *)
+  ]
+;; *)
+
+(* let prog1() =
+  [
+    Move(Translate{x = 0.0 ; y = 5.0});
+    Move(Translate{x = -1.0 ; y = 1.0});
+    Move(Translate{x =  1.0 ; y = -1.0});
+    Move(Translate{x = -1.0 ; y = 1.0});
+    (* Move(Translate{x = -1.0 ; y = 0.0});
+    Move(Translate{x = -1.0 ; y = 0.0});
+    Move(Translate{x = -1.0 ; y = -1.0});
+    Move(Translate{x =  0.0 ; y = -1.0});
+    Move(Translate{x =  0.0 ; y = -1.0});
+    Move(Translate{x =  0.0 ; y = -1.0});
+    Move(Translate{x =  0.0 ; y = -1.0}); *)
+  ] *)
+
+
+  (* let prog1() =
+  [
+    Move(Translate{x = -1.0 ; y = 4.0});
+    
+    (* Move(Translate{x = -1.0 ; y = 1.0}); *)
+    Move(Translate{x =  -1.0 ; y = 1.0});
+    Move(Translate{x = -1.0 ; y = 1.0});
+    
+    Move(Translate{x = -1.0 ; y = 0.0});
+    Move(Translate{x = -1.0 ; y = 0.0});
+    
+    Move(Translate{x = -1.0 ; y = -1.0});
+    Move(Translate{x = -1.0 ; y = -1.0});
+    
+    Move(Translate{x = 0.0 ; y = -1.0});
+    Move(Translate{x = 0.0 ; y = -1.0});
+    Move(Translate{x = 0.0 ; y = -1.0});
+    
+    Move(Translate{x = 1.0 ; y = -1.0});
+    Move(Translate{x = 1.0 ; y = -1.0});
+    Move(Translate{x = 1.0 ; y = -1.0});
+    Move(Translate{x = 1.0 ; y = -1.0});
+    Move(Translate{x = 1.0 ; y = -1.0});
+    Move(Translate{x = 1.0 ; y = -1.0});
+  
+    Move(Translate{x = 1.0 ; y = 1.0});
+    Move(Translate{x = 1.0 ; y = 1.0});
+    Move(Translate{x = 1.0 ; y = 1.0});
+    Move(Translate{x = 1.0 ; y = 1.0});
+    Move(Translate{x = 1.0 ; y = 1.0});
+    Move(Translate{x = 1.0 ; y = 1.0});
+
+    Move(Translate{x = 0.0 ; y = 1.0});
+    Move(Translate{x = 0.0 ; y = 1.0});
+    Move(Translate{x = 0.0 ; y = 1.0});
+
+    Move(Translate{x = -1.0 ; y = 1.0});
+    Move(Translate{x = -1.0 ; y = 1.0});
+    Move(Translate{x = -1.0 ; y = 0.0});
+    Move(Translate{x = -1.0 ; y = 0.0});
+
+    Move(Translate{x = -1.0 ; y = -1.0});
+    Move(Translate{x = -1.0 ; y = -1.0});
+
+  ] *)
+
+
+
+  let prog1() =
+  [
+    Move(Translate{x = -1.0 ; y = 4.0});
+    Repeat(2,[Move(Translate{x =  -1.0 ; y = 1.0})]);
+    
+    Repeat(2,[ Move(Translate{x = -1.0 ; y = 0.0})]);
+    
+    
+    Repeat(2,[Move(Translate{x = -1.0 ; y = -1.0})]);
+    
+    
+    Repeat(3,[Move(Translate{x = 0.0 ; y = -1.0})]);
+    
+    Repeat(6,[Move(Translate{x = 1.0 ; y = -1.0})]);
+    
+  
+    Repeat(6,[Move(Translate{x = 1.0 ; y = 1.0})]);
+    
+    Repeat(3,[Move(Translate{x = 0.0 ; y = 1.0})]);
+    
+    Repeat(2,[Move(Translate{x = -1.0 ; y = 1.0})]);
+    
+    Repeat(2,[Move(Translate{x = -1.0 ; y = 0.0})]);
+    
+    Repeat(2,[Move(Translate{x = -1.0 ; y = -1.0})]);
+
+  ]
+
+
+(* let rev_opp cmds = 
+  let rec aux cmds =
+    match cmds with 
+    | [] -> []
+    | a::w ->
+        match a with
+        | Move ( Translate {x = _ ; y = _ }) -> a :: aux w
+        | Move ( Rotate ({x = xx ; y = yy } , f) ) -> Move(Rotate ({x = xx ; y = yy },-.f))  :: aux w
+        | Repeat (i,c) -> Repeat(i, List.rev (aux c)) :: aux w
+        | Either (p,q) -> a:: aux p @ aux q
+  in List.rev (aux cmds) 
 ;;
+
+let rec dragon size n = 
+  if n=0 then [Move(Translate{x = size; y = 0.0 })]
+  else
+    let size' = size /. sqrt 2. in
+    dragon size' (n-1) @
+    [Move(Rotate({x = 0.0 ; y = 0.0}, 90.0)) ] @ 
+    rev_opp (dragon size' (n-1))
+;;
+
+
+let prog1() =
+  dragon 5. 3
+;; *)
+
+
+
+
+(* let prog1() = *)
 
 (* PROG TEST POUR ROTATE *)
 (* let prog () =
@@ -219,7 +362,7 @@ let prog17 () =
   ]
 ;; 
 
-let prog1() = [
+let prog13() = [
   Repeat (9, [Move (Translate {x = 1. ;y=1.})]);
   Repeat (9, [Move (Translate {x = (-1.) ;y=(-1.)})]);
 
