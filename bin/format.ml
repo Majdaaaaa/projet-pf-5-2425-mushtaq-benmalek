@@ -1,4 +1,3 @@
-(* open Graphics;; *)
 open Pf5.Geo;;
 open Prog;;
 exception Not_in_rectangle;;

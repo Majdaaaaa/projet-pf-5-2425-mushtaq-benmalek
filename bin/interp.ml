@@ -19,16 +19,10 @@ let drawing () =
 
 let () =
   try
-    let nbargs = Array.length Sys.argv in 
-    if nbargs <= 1 then ( 
-      Printf.printf "Il faut donné un programme a éxécuté\n";
-      raise Quit;
-    ) else 
-      Arg.parse Format.speclist Format.anon_fun Format.usage_msg; 
+    Arg.parse Format.speclist Format.anon_fun Format.usage_msg; 
     condition();
     Option.size ();
     Option.bc ();
-    (*? changement de la couleur de l'avant plan pour dessiner le repère *)
     Option.fc ();
     Init.init_graphics ();
     Option.not_detereministic !prog;
@@ -54,5 +48,3 @@ let () =
   | Abs_ae_exception -> Printf.printf "Les options -ae et -abs ne peuvent pas s'éxecuter en même temps.\n"
   | Rc_only -> Printf.printf "L'option -rc doit être utiliser avec l'option -abs ou -ae.\n"
   | Not_color -> Printf.printf "Ce n'est pas une couleur valide.\n"
-
-(* "Choissisez entre le programme 1,2,3 ou 4 "*)

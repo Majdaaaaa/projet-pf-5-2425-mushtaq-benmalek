@@ -17,5 +17,3 @@ type rectangle = {
 val in_rectangle : rectangle -> point -> bool 
 val corners : rectangle -> point list 
 val rectangle_of_list : point list -> rectangle
-val list_length : 'a list -> int 
-val list_nth : 'a list -> int -> 'a

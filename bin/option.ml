@@ -1,20 +1,8 @@
 open Graphics;;
 open Format;;
 open Pf5.Interp;;
+open Pf5.Liste;;
 open Pf5.Approx;;
-
-let rec list_nth l k = 
-  match l with 
-  |[] -> failwith "liste vide"
-  |[a] -> if k==0 then a else failwith "existe pas"
-  |a::w -> if k==0 then a else list_nth w (k-1)
-;;
-
-let rec list_length l = 
-  match l with 
-  |[] -> 0
-  |_::w -> 1 + list_length w
-;;
 
 let print_programme prog =
   match prog with
@@ -35,7 +23,7 @@ let is_det = is_deterministic !prog;;
 (* Sur-approximation *)
 let abs j () =
   if !is_abs then
-    if is_det = false then
+    if is_deterministic !prog = false then
       let size = list_length !prog in
       if j < size then(
         if j = -1 then Abs.draw_rect !rect
@@ -84,14 +72,14 @@ let pc () =
 
 let cr i () =
   try
-    if !is_abs = false || ((!is_abs=true) && (!is_cr=true))  then (
-      Cr.run !prog i)
+    (*Sur-approx et points au même temps pas de sens*)
+    if !is_abs = false then (
+      Cr.run !det_prog i)
   with 
   | Cr.Fin -> raise Cr.Fin
 ;;
 
 let size () = 
-  (* Printf.printf "w : %d , h : %d\n" !w !h; *)
   let res = " "^string_of_int !w^"x"^string_of_int !h in
   open_graph res
 ;;
