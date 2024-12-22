@@ -20,6 +20,7 @@ let draw_rect rect =
     @param rect le rectangle à dessiner prog le programme à exécuter
 *)
 let run_abs prog rect =
-    rect := over_approximate prog !rect;
-    draw_rect !rect;
+  rect := over_approximate prog !rect;
+  printf_rect rect;
+  draw_rect !rect;
 ;;
