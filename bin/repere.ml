@@ -13,7 +13,6 @@ let repere ()  =
   (*axe Y*)
   moveto (width/2) length;
   lineto (width/2) 0;
-  (*Ordre supérieur = fonction de fonction *)
   (*graduation X*)
   moveto  0 (length/2);
 
@@ -50,5 +49,7 @@ let repere ()  =
     )
   in 
   grad_Y (length/19) 9 (-9) width;
+
+  moveto (width/2) (length/2);
 
 ;;

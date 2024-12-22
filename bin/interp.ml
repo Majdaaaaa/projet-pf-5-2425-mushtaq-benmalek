@@ -12,10 +12,11 @@ let drawing () =
   Option.ae !i ();
   Option.pc ();
   Option.cr !i  ();
+  Option.fc ();
   i := !i+1;
   j := !j+1;
-  Option.fc ();
 ;;
+
 
 let () =
   try
@@ -37,9 +38,10 @@ let () =
           while true do
             drawing ();
           done
-        )
+        );
       with
       | Cr.Fin -> set_color red;  moveto 2 70 ; draw_string "Fin du programme";
+      | Option.Deter -> set_color red;  moveto 2 80 ; draw_string "Programme deterministe";
     done
   with 
   | Quit -> close_graph ()

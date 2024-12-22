@@ -1,5 +1,6 @@
 open Pf5.Geo;;
 open Pf5.Interp;;
+open Cr;;
 
 (* let prog1 () = 
    (*Carré*)
@@ -40,13 +41,13 @@ let move1 = Move trans1
 let move2 = Move trans2
 let move3 = Move trans3
 (* Composer un programme *)
-let prog1 ()= [
+let prog19 ()= [
   (* move1; *)
   Repeat (100, [move2; move1;move3]);
 ]
 
 
-let prog2 () =
+let prog20 () =
   (* let mid_x = (float_of_int (size_x ())) /. 2. in
      let mid_y = (float_of_int (size_y ())) /. 2. in *)
   [
@@ -197,35 +198,60 @@ let prog8 () =
    ;; *)
 
 (* PROGRAMME POUR LE EITHER *)
-(* let prog () =
-   let mid_x = 0.0 in
-   let mid_y = 0.0 in
-   [
-    Either ( [Move (Translate {x = mid_x +. 3.0; y = mid_y +. 3.0})] , [Move(Rotate ({x = mid_x ; y = mid_y} , 90.0 ))] )
+let prog17 () =
+  let mid_x = 0.0 in
+  let mid_y = 0.0 in
+  [
+    Either ( [Move (Translate {x = mid_x +. 3.0; y = mid_y +. 3.0})] , [Move(Rotate ({x = mid_x ; y = mid_y} , 90.0 ))] );
 
-    (* Repeat(5, [Move(Translate {x = !rect.x_min -. 2. ; y = mid_y })] ); *)
+    Repeat(5, [Move(Translate {x = -. 2. ; y = mid_y })] );
     (* Point dans le premier quadrant (x > 0, y > 0) *)
-    (* Move (Translate {x = mid_x +. 5.0; y = mid_y +. 5.0}); *)
+    Move (Translate {x = mid_x +. 5.0; y = mid_y +. 5.0});
 
     (* Point dans le deuxième quadrant (x < 0, y > 0) *)
-    (* Move (Translate {x = mid_x -. 2.0; y = mid_y +. 2.0}); *)
+    Move (Translate {x = mid_x -. 2.0; y = mid_y +. 2.0});
     (* Point dans le troisième quadrant (x < 0, y < 0) *)
-    (* Move (Translate {x = mid_x -. 5.0; y = mid_y -. 5.0}); *)
+    Move (Translate {x = mid_x -. 5.0; y = mid_y -. 5.0});
     (* Point dans le quatrième quadrant (x > 0, y < 0) *)
-    (* Move (Translate {x = mid_x +. 3.0; y = mid_y +. 3.0}); *)
+    Move (Translate {x = mid_x +. 3.0; y = mid_y +. 3.0});
     (* Retour au centre *)
-    (* Move (Translate {x = -.mid_x; y = -.mid_y}); *)
-   ]
-   ;;  *)
+    Move (Translate {x = -.mid_x; y = -.mid_y})
+  ]
+;; 
 
-let profg() = [Repeat (1, [
-    Either (
-      [Move(Translate {x = 1.; y = 0.})],
-      [Move(Translate {x = -1.; y = 0.})]
-    );
-    Either (
-      [Move(Translate {x = 0.; y = 1.})],
-      [Move(Translate {x = 0.; y = -1.})]
-    )      ]
-  )]
+let prog1() = [
+  Repeat (9, [Move (Translate {x = 1. ;y=1.})]);
+  Repeat (9, [Move (Translate {x = (-1.) ;y=(-1.)})]);
+
+  Repeat (9, [Move (Translate {x = (-1.) ;y=1.})]);
+  Repeat (9, [Move (Translate {x = 1. ;y=(-1.)})]);
+
+  Repeat (9, [Move (Translate {x = 1. ;y=(-1.)})]);
+  Repeat (9, [Move (Translate {x = (-1.) ;y=1.})]);
+
+  Repeat (9, [Move (Translate {x = (-1.) ;y=(-1.)})]);
+]
 ;;
+
+let prog2 () = [
+  Move (Translate {x = 0. ; y=1.});
+  Move (Rotate (!point, 36.));
+  Move (Rotate (!point, 72.));
+
+  (* Move (Translate {x = 1. ; y=0.}); *)
+  Move (Rotate (!point, 36.));
+  Move (Rotate (!point, 72.));
+
+  (* Move (Translate {x = 0. ; y=1.}); *)
+  Move (Rotate (!point, 36.));
+  Move (Rotate (!point, 72.));
+
+  (* Move (Translate {x = (-1.) ; y=0.}); *)
+  Move (Rotate (!point, 36.));
+  Move (Rotate (!point, 72.));
+
+  (* Move (Translate {x = (0.) ; y=1.}); *)
+  Move (Rotate (!point, 36.));
+  Move (Rotate (!point, 72.));
+
+]

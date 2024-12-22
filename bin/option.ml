@@ -3,6 +3,7 @@ open Format;;
 open Pf5.Interp;;
 open Pf5.Liste;;
 open Pf5.Approx;;
+exception Deter;;
 
 let print_programme prog =
   match prog with
@@ -22,7 +23,7 @@ let is_det = is_deterministic !prog;;
 
 (* Sur-approximation *)
 let abs j () =
-  if !is_abs then
+  if !is_abs= true then
     if is_deterministic !prog = false then
       let size = list_length !prog in
       if j < size then(
@@ -31,6 +32,7 @@ let abs j () =
           let programme = list_nth !prog j in
           Abs.run_abs [programme] rect)
       else raise Cr.Fin
+    else raise Deter
 ;;
 
 (* Choix aléatoire *)
@@ -73,7 +75,7 @@ let pc () =
 let cr i () =
   try
     (*Sur-approx et points au même temps pas de sens*)
-    if !is_abs = false then (
+    if (!is_abs = false && !is_ae = false ) || !is_cr = true then (
       Cr.run !det_prog i)
   with 
   | Cr.Fin -> raise Cr.Fin
