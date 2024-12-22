@@ -249,7 +249,7 @@ let prog1() =
 
 
 
-  (* let prog1() =
+  let prog1() =
   [
     Move(Translate{x = -1.0 ; y = 4.0});
     Repeat(2,[Move(Translate{x =  -1.0 ; y = 1.0})]);
@@ -275,9 +275,9 @@ let prog1() =
     
     Repeat(2,[Move(Translate{x = -1.0 ; y = -1.0})]);
 
-  ] *)
+  ]
 
-let prog1() = 
+(* let prog1() = 
     [
       Either(
         [Move(Translate{ x = 1.0 ; y = 1.0})],
@@ -290,8 +290,8 @@ let prog1() =
           Move(Rotate ({x = 0. ; y = 0. } , 30.0 ))
           ]
       )
-    ]
-  ;;
+    ] *)
+  (* ;; *)
 
 (* let prog1() = *)
 

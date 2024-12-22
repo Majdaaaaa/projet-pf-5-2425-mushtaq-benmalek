@@ -4,14 +4,6 @@ open Pf5.Interp;;
 open Pf5.Liste;;
 open Pf5.Approx;;
 exception Deter;;
-
-let print_programme prog =
-  match prog with
-  | Move _ -> Printf.printf "Move\n"
-  | Repeat _ -> Printf.printf "Repeat \n " 
-  | Either _ -> Printf.printf "Either\n"
-;;
-
 let det_prog = ref [];;
 
 let not_detereministic p = 
@@ -22,6 +14,9 @@ let not_detereministic p =
 let is_det = is_deterministic !prog;;
 
 (* Sur-approximation *)
+(** [abs] applique l'option abs au rectangle [j]
+    @param j la j-ème instruction à exécuter du programme
+*)
 let abs j () =
   if !is_abs= true then
     if is_deterministic !prog = false then
@@ -36,6 +31,9 @@ let abs j () =
 ;;
 
 (* Choix aléatoire *)
+(** [ae] applique l'option abs au rectangle [i]
+    @param i la j-ème instruction à exécuter du programme
+*)
 let ae i () =
   if !is_ae then 
     let rect_list = run_rect !det_prog !rect in
@@ -81,11 +79,15 @@ let cr i () =
   | Cr.Fin -> raise Cr.Fin
 ;;
 
+(** [size] set la size de la fenêtre et l'ouvre
+*)
 let size () = 
   let res = " "^string_of_int !w^"x"^string_of_int !h in
   open_graph res
 ;;
 
+(** [rc] applique l'option rc au rectangle [rect]
+*)
 let rc() = 
   if !is_rc then 
     let c = rgb !rc_r !rc_v !rc_b in
