@@ -1,9 +1,8 @@
 open Graphics;;
-(**[init_graphics] affiche des informations sur les actions possible, change le titre de la fenêtre, 
-   et appel [repere] pour dessiner le repere 
+(**[init_graphics] affiche des informations sur les actions possibles, change le titre de la fenêtre, 
+   et appel [repere] pour dessiner le repère 
 *)
 let init_graphics () =
-  (* Printf.printf "Début programme\n"; *)
   set_window_title "Interpreteur Graphique";
   set_text_size 40;
   moveto 2 5;

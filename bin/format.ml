@@ -49,7 +49,7 @@ let rc_v = ref 0;;
 let rc_b = ref 0;;
 let is_rc = ref false;;
 
-(* PROGRAM*)
+(* PROGRAM *)
 let prog = ref [];;
 
 let set_rect = Arg.Tuple[
@@ -115,7 +115,7 @@ let ae = Arg.Tuple[
   ];;
 
 
-(* Liste des options avec leurs affectations  et leurs légendes*)
+(* Liste des options avec leurs affectations  et leurs légendes *)
 let speclist = [
   ("-abs",abs,"x_min y_min x_max y_max : approximation de la position avec sur-approximation du Either");
   ("-cr", Arg.Set is_cr,": Affichage des points");
@@ -148,10 +148,10 @@ let usage_msg = "inter ...  Options disponibles :";;
     @return true ou false *)
 let check_color r g b  = if r >= 0 && r < 256  && g >= 0 && g < 256 && b >= 0 && b < 256 then true else false ;;
 
-(** [condition] lève une exception si une de ces conditions n'est pas respectées :
+(** [condition] lève une exception si une de ces conditions n'est pas respectée :
     - si la coordonnée (0,0) n'est pas dans le rectangle initiale
     - si les options -ae et -abs sont exécutées en même temps
-    - si l'option -rc est exécuté sans les options -abs et -ae
+    - si l'option -rc est exécutée sans les options -abs et -ae
     - si les valeurs pour les couleurs ne sont pas dans l'intervalle [0,255]
 *)
 let condition() =

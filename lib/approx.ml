@@ -3,7 +3,7 @@ open Interp
 open Liste
 (* Code de la Section 5 du projet. *)
 
-(* c'est des float donc si je rajoute 1 c troooop grand donc j'ajoute un petit nbr pr être sûre que max est inclus *)
+(* si je rajoute 1 c'est beaucoup trop grand et on pourrait avoir un point qui soit en dehors du rectangle donc j'ajoute un petit nbr pr être sûre que le max soit inclus *)
 let sample (rect : rectangle) : point =
   let x= Random.float (rect.x_max-.rect.x_min+.0.00001) in
   let y= Random.float (rect.y_max-.rect.y_min+.0.00001) in 
@@ -55,10 +55,7 @@ let target_reached_rect (prog : program) (r : rectangle) (target : rectangle) : 
     [] -> false
     |[pr] -> let l = run_rect pr r in 
       inclusion (last l) target
-      (* inclusion (list_nth l ((list_length l )-1)) target *)
     |pr :: rest -> let l = run_rect pr r in 
-      (* inclusion (list_nth l ((list_length l )-1)) target && aux rest r target *)
-      (* inclusion (list_nth l ((list_length l )-1)) target && aux rest r target *)
       inclusion (last l) target && aux rest r target
   in aux c_l r target
 ;;
@@ -102,7 +99,7 @@ let rec over_approximate (prog : program) (r : rectangle) : rectangle =
             
             let res_max_y = if new_p.y_max > new_q.y_max then new_p.y_max else new_q.y_max in
             
-            let res= {x_min=res_min_x;y_min=res_min_y;x_max=res_max_x;y_max=res_max_y} in
+            let res= { x_min = res_min_x ; y_min = res_min_y ; x_max = res_max_x ; y_max = res_max_y } in
             over_approximate w res
 ;;
 

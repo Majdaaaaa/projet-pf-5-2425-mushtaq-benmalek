@@ -8,7 +8,7 @@ let i = ref 0;;
 let j = ref (-1);;
 let copie_rect = ref {x_min = 0.; y_min = 0. ; x_max = 0. ; y_max = 0.};;
 
-(** [drawing] appel toute les fonctions qui servent a afficher les affichages des options demandé par l'utilisateur.
+(** [drawing] appelle toutes les fonctions qui servent à afficher les affichages des options demandées par l'utilisateur.
 *)
 let drawing () = 
   Option.rc();
@@ -21,7 +21,7 @@ let drawing () =
   j := !j+1;
 ;;
 
-(** [choix_abs] Affiche un message si l'option -abs est spécifié et le programme est déterministe.
+(** [choix_abs] Affiche un message si l'option -abs est spécifiée et que le programme est déterministe.
 *)
 let  choix_abs  () = 
   set_color red;
@@ -41,13 +41,13 @@ let prog_fini () =
   moveto 10 (size_y ()-35);
   draw_string "Appuyez sur <1> ou <2> ou <3> ou <4> pour choisir un nouveau programme a executer." ;;
 
-(** [main] appel toute les fonctions des options, du repére et [drawing], ainsi que le parsing.
-    Attends une entrée par le clavier : 
+(** [main] appelle toute les fonctions des options, du repère et [drawing], ainsi que le parsing.
+    Attend une entrée par le clavier : 
     - <q> : pour fermer la fenêtre.
     - <n> : passer à l'étape suivant.
-    - <s> : affiche toute l'exécution du programme en une fois.
-      Rattrape les exceptions [Cr.Fin] et [Option.Deter] fait un l'affichage approprié et laisse le choix a l'utilisateur pour
-      un autre programme a éxécution.
+    - <s> : affiche toute l'exécution du programme en une seule fois.
+      Rattrape les exceptions [Cr.Fin] et [Option.Deter] fait un affichage approprié et laisse le choix à l'utilisateur pour
+      un autre programme à exécuter.
       Lève l'exception [Quit].
 *)
 let rec main () = 
@@ -87,7 +87,7 @@ and handler_ex () =
   let eve = wait_next_event [Key_pressed] in 
   choix_prog  eve.key
 
-(** [choix_prog] attends une entrée au clavier pour spécifié un nouveau programme a éxécuter.
+(** [choix_prog] attends une entrée au clavier pour spécifier un nouveau programme à exécuter.
     @param key l'entrée clavier. 
 *)
 and choix_prog key = 

@@ -62,8 +62,8 @@ let run_det (prog : program) (p : point) : point list =
 
 let target_reached_det (prog : program) (p : point) (target : rectangle) : bool =
   let l=run_det prog p in
-  in_rectangle target (last l);;
-(* in_rectangle target (list_nth l ((list_length l)-1)) *)
+  in_rectangle target (last l)
+;;
 
 let run (prog : program) (p : point) : point list =
   let rec aux prog p =
@@ -102,7 +102,6 @@ let  target_reached (prog : program) (p : point) (r : rectangle) : bool =
     match c_l with 
       [] -> false
     |[pr] -> let l = run pr p in 
-      (* in_rectangle r (list_nth l ((list_length l)-1)) *)
       in_rectangle r (last l)
     |pr :: rest -> 
       aux [pr] p r && aux rest p r

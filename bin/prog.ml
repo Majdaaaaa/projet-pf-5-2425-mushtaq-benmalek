@@ -72,9 +72,9 @@ let prog4 () =
         Move (Translate {x = 0.5; y = 0.0}); 
         Move (Rotate ({x = 1.0; y = 1.0}, 90.0));
       ]);
-    (*Reviens a l'origine*)
+    (*Reviens à l'origine*)
     Move (Translate {x = (-1.0); y = (-1.0)});  
-    (* Soit un carré soit un rectangle  *)
+    (* Dessine soit un carré soit un rectangle  *)
     Move (Translate {x = -4.0; y = -4.0}); 
     Either(
       [Repeat (4, [Move(Translate {x=0.5; y=0.});
@@ -83,9 +83,9 @@ let prog4 () =
       [Repeat(4, [Move(Translate {x=1.; y=0.}); 
                   Move(Rotate ({x=(-4.); y=(-4.)}, 90.))])]
     );
-    (*Reviens a l'origine*)
+    (*Reviens à l'origine*)
     Move (Translate {x = 4.0; y = 4.0}); 
-    (* Soit un carré soit un triangle  *)
+    (* Dessine soit un carré soit un triangle  *)
     Move (Translate {x = (-4.0); y = 5.0});
     Either(
       [Repeat (4, [Move(Translate {x=0.5; y=0.});

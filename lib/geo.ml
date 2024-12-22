@@ -90,6 +90,4 @@ let rectangle_of_list (pl : point list) : rectangle =
   |_::_ -> 
     let l_y = sort_y pl and l_x = sort_x pl in 
     {x_min= (list_nth l_x 0).x; x_max=(last l_x).x; y_min=(list_nth l_y 0).y ; y_max= (last l_y).y}
-    (* let l_y = sort_y pl and l_x = sort_x pl and l_length = list_length pl in 
-    {x_min= (list_nth l_x 0).x; x_max=(list_nth l_x (l_length-1)).x; y_min=(list_nth l_y 0).y ; y_max= (list_nth l_y (l_length-1)).y} *)
 ;;

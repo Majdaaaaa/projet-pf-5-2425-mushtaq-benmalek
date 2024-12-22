@@ -5,7 +5,7 @@ open Pf5.Liste;;
 open Pf5.Approx;;
 exception Deter;;
 
-(** [not_derteministic] utilse la fonction [all_choices] pour déroulé toute les éxécutions possibles d'un programme 
+(** [not_derteministic] utilse la fonction [all_choices] pour dérouler toute les exécutions possibles d'un programme 
     non-deterministe, et choisi une exécution au hasard et la stocke dans la variable det_prog
     @param p le programme 
 *)
@@ -63,13 +63,13 @@ let bc ()=
 ;;
 
 (** [fc] applique l'option -fc.
-    Change la couleur de l'avant-plan si l'option est activé, remet la couleur par défaut (noir) sinon.
+    Change la couleur de l'avant-plan si l'option est activée, remet la couleur par défaut (noir) sinon.
 *)
 let fc () =
   let basic = black in 
   if !is_fc then
     let c = rgb !fc_r !fc_v !fc_b in
-    set_color c; (* Change la valeur de Graphics.foreground, tout les dessins a partir de la seront fais de la couleur c *)
+    set_color c; (* Change la valeur de Graphics.foreground, tous les dessins à partir de la seront fait de la couleur c *)
   else 
     set_color basic
 ;;
@@ -83,12 +83,12 @@ let pc () =
 ;;
 
 (** [cr] applique l'option -cr. L'option -cr affiche les points si :
-    - l'option -abs n'est pas activé.
-    - l'option -ae n'est pas activé.
-      (Donc -cr est activé par défaut si aucune option n'est specifié)
-    - l'option -cr est activé et -abs ne l'est pas. 
+    - l'option -abs n'est pas activée.
+    - l'option -ae n'est pas activée.
+      (Donc -cr est activée par défaut si aucune option n'est specifiée)
+    - l'option -cr est activée et -abs ne l'est pas. 
       Rattrape l'exception [Fin] et la renvoie pour qu'elle arrive dans [main].
-      @param i le i-éme point a affiché 
+      @param i le i-ème point à afficher 
 *)
 let cr i () =
   try

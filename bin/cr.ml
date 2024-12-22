@@ -4,9 +4,9 @@ open Pf5.Interp;;
 exception Fin;;
 open Pf5.Liste;;
 
-(** [run] dessine les points donné par la fonction [Pf5.run].
-    Dessine les points de 1 à i (de 1 pour ne pas dessiné l'origine) 
-    à chaque appel pour évité que les rectangles recouverent les points.
+(** [run] dessine les points donnés par la fonction [Pf5.run].
+    Dessine les points de 1 à i (de 1 pour ne pas dessiner l'origine) 
+    à chaque appel pour éviter que les rectangles recouvrent les points.
     Lève l'exception [Fin] quand le programme est fini.
     @param prog 
     @param i
