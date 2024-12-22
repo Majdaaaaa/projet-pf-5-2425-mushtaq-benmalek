@@ -30,7 +30,9 @@ let  choix_abs  () =
   moveto 10 (size_y ()-35);
   draw_string "Appuyez sur <1> ou <2> ou <3> ou <4> pour choisir un nouveau programme a executer." ;
   moveto 10 (size_y ()-50);
-  draw_string "Les programmes <3> et <4> ne sont pas deterministe.";;
+  draw_string "Les programmes <3> et <4> ne sont pas deterministe.";
+  Option.fc ()
+;;
 
 (** [prog_fini] Affiche un message lorsque le programme est fini.
 *)
@@ -39,7 +41,8 @@ let prog_fini () =
   moveto 10 (size_y ()-20);
   draw_string "Programme fini.";
   moveto 10 (size_y ()-35);
-  draw_string "Appuyez sur <1> ou <2> ou <3> ou <4> pour choisir un nouveau programme a executer." ;;
+  draw_string "Appuyez sur <1> ou <2> ou <3> ou <4> pour choisir un nouveau programme a executer." ;
+  Option.fc ();;
 
 (** [main] appel toute les fonctions des options, du repére et [drawing], ainsi que le parsing.
     Attends une entrée par le clavier : 

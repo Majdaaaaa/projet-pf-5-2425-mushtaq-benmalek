@@ -34,16 +34,16 @@ let prog1 () =
 (* X *)
 let prog2() = 
   [
-    Repeat (9, [Move (Translate {x = 1. ;y=1.})]);
-    Repeat (9, [Move (Translate {x = (-1.) ;y=(-1.)})]);
+    Repeat (7, [Move (Translate {x = 1. ;y=1.})]);
+    Repeat (7, [Move (Translate {x = (-1.) ;y=(-1.)})]);
 
-    Repeat (9, [Move (Translate {x = (-1.) ;y=1.})]);
-    Repeat (9, [Move (Translate {x = 1. ;y=(-1.)})]);
+    Repeat (7, [Move (Translate {x = (-1.) ;y=1.})]);
+    Repeat (7, [Move (Translate {x = 1. ;y=(-1.)})]);
 
-    Repeat (9, [Move (Translate {x = 1. ;y=(-1.)})]);
-    Repeat (9, [Move (Translate {x = (-1.) ;y=1.})]);
+    Repeat (7, [Move (Translate {x = 1. ;y=(-1.)})]);
+    Repeat (7, [Move (Translate {x = (-1.) ;y=1.})]);
 
-    Repeat (9, [Move (Translate {x = (-1.) ;y=(-1.)})]);
+    Repeat (7, [Move (Translate {x = (-1.) ;y=(-1.)})]);
   ]
 ;;
 
