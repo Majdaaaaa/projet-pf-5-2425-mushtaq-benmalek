@@ -71,7 +71,7 @@ let tuple_color = Arg.Tuple[
    ;; *)
 
 let print_abs()=
-  rect:= { x_min = !x_min ; x_max = !x_max ; y_min = !y_min ; y_max = !y_max };
+  rect := { x_min = !x_min ; x_max = !x_max ; y_min = !y_min ; y_max = !y_max };
   (* printf_rect(); *)
   (* Printf.printf "de abs x_min = %f\n" !x_min;
      Printf.printf "de abs y_min = %f\n" !y_min;
@@ -143,6 +143,7 @@ let rc =
   ]
 ;;
 
+
 let ae = Arg.Tuple[
     Arg.Float (fun xmin -> x_min := xmin);
     Arg.Float (fun ymin -> y_min := ymin);
@@ -151,7 +152,7 @@ let ae = Arg.Tuple[
     Arg.Unit (fun () -> 
         rect := { x_min = !x_min; x_max = !x_max; y_min = !y_min; y_max = !y_max });
     Arg.Set is_ae;
-  ]
+  ];;
 
 
 let speclist = [
