@@ -74,7 +74,6 @@ let rec main () =
     with
     | Cr.Fin -> (
         prog_fini ();
-        (*Pour abs si *)
         handler_ex ();
       )
     | Option.Deter -> (
