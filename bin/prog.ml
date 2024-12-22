@@ -66,30 +66,32 @@ let prog3() =
 
 let prog4 () =
   [
-    Move (Translate {x = 3.0; y = 3.0});  
+    (*Carré*)
+    Move (Translate {x = 1.0; y = 1.0});  
     Repeat (4, [
-        Move (Translate {x = 3.0; y = 0.0}); 
-        Move (Rotate ({x = 3.0; y = 3.0}, 90.0))
-      ]);
-    Move (Translate {x = -3.0; y = -3.0});
-
-    Move (Translate {x = -1.0; y = -1.0});  (* Centre du cercle *)
-    Repeat (36, [
         Move (Translate {x = 0.5; y = 0.0}); 
-        Move (Rotate ({x = -1.0; y = -1.0}, 10.0))
+        Move (Rotate ({x = 1.0; y = 1.0}, 90.0));
       ]);
+    (*Reviens a l'origine*)
+    Move (Translate {x = (-1.0); y = (-1.0)});  
+    (* Soit un carré soit un rectangle  *)
+    Move (Translate {x = -4.0; y = -4.0}); 
     Either(
-      [Repeat (4, [Move(Translate {x=(-3.); y=0.});
-                   Move (Rotate ({x=(-3.0); y= (-3.0)}, 90.))])] , 
-      [Repeat(36, [Move(Translate {x=(-1.); y=0.}); 
-                   Move(Rotate ({x=1.; y=1.}, 10.))])]
+      [Repeat (4, [Move(Translate {x=0.5; y=0.});
+                   Move (Rotate ({x=(-4.0); y= (-4.0)}, 90.))])] , 
+
+      [Repeat(4, [Move(Translate {x=1.; y=0.}); 
+                  Move(Rotate ({x=(-4.); y=(-4.)}, 90.))])]
     );
-    Move (Translate {x = 3.0; y = -3.0});
+    (*Reviens a l'origine*)
+    Move (Translate {x = 4.0; y = 4.0}); 
+    (* Soit un carré soit un triangle  *)
+    Move (Translate {x = (-4.0); y = 5.0});
     Either(
-      [Repeat (4, [Move(Translate {x=(-2.0); y=0.});
-                   Move (Rotate ({x=(-2.0); y= (-2.0)}, 90.))])] , 
-      [Repeat(3, [Move(Translate {x=(-4.); y=(-2.)}); 
-                  Move(Rotate ({x=(-4.); y=(-4.)}, 120.))])]
+      [Repeat (4, [Move(Translate {x=0.5; y=0.});
+                   Move (Rotate ({x = (-4.0); y = 5.0}, 90.))])] , 
+      [Repeat(3, [Move(Translate {x=0.5; y=0.}); 
+                  Move(Rotate ({x = (-4.0); y = 5.0}, 120.))])]
     )
   ]
 ;;
