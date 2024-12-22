@@ -21,6 +21,5 @@ let draw_rect rect =
 *)
 let run_abs prog rect =
   rect := over_approximate prog !rect;
-  printf_rect rect;
   draw_rect !rect;
 ;;

@@ -4,8 +4,13 @@ open Pf5.Interp;;
 exception Fin;;
 open Pf5.Liste;;
 
-let point = ref {x = 0. ; y = 0. };;
-
+(** [run] dessine les points donné par la fonction [Pf5.run].
+    Dessine les points de 1 à i (de 1 pour ne pas dessiné l'origine) 
+    à chaque appel pour évité que les rectangles recouverent les points.
+    Lève l'exception [Fin] quand le programme est fini.
+    @param prog 
+    @param i
+*)
 let run prog i =  
   let l = run prog {x=0.; y=0.} in
   if i < list_length l  then (
@@ -21,7 +26,6 @@ let run prog i =
         let x = mid_x + (p_x * sx) in
         let y = mid_y + (p_y * sy) in 
         fill_rect x y 5 5;
-        point := p;
         aux i (j + 1)
     in
     aux i 1

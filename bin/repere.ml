@@ -1,7 +1,7 @@
 open Graphics;;
 exception Quit;;
 
-(* Fonction pour dessiner un repère orthonormé *)
+(**[repere] dessine un repére orthonormé sur la fenêtre*)
 let repere ()  =
   let width = size_x () in
   let length = size_y () in 

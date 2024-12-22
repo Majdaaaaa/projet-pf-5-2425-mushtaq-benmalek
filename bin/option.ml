@@ -4,17 +4,22 @@ open Pf5.Interp;;
 open Pf5.Liste;;
 open Pf5.Approx;;
 exception Deter;;
-let det_prog = ref [];;
 
+(** [not_derteministic] utilse la fonction [all_choices] pour déroulé toute les éxécutions possibles d'un programme 
+    non-deterministe, et choisi une exécution au hasard et la stocke dans la variable det_prog
+    @param p le programme 
+*)
+let det_prog = ref [];;
 let not_detereministic p = 
   let lp = all_choices p in 
   let rand = Random.int (list_length lp) in 
   det_prog := list_nth lp rand 
 ;;
-let is_det = is_deterministic !prog;;
 
 (* Sur-approximation *)
 (** [abs] applique l'option abs au rectangle [j]
+    Lève l'exception [Deter] si le programme est deterministe.
+    Lève l'exception [Fin] quand le programme est fini.
     @param j la j-ème instruction à exécuter du programme
 *)
 let abs j () =
@@ -32,7 +37,8 @@ let abs j () =
 
 (* Choix aléatoire *)
 (** [ae] applique l'option abs au rectangle [i]
-    @param i la j-ème instruction à exécuter du programme
+    Lève l'exception [Fin] quand le programme est fini.
+    @param i la i-ème instruction à exécuter du programme
 *)
 let ae i () =
   if !is_ae then 
@@ -44,17 +50,21 @@ let ae i () =
     else raise Cr.Fin
 ;;
 
+(** [bc] applique l'option -fc.
+    Change la couleur de l'arrière-plan si l'option est activé.
+*)
 let bc ()= 
   if !is_bc then 
     let c = rgb !bc_r !bc_v !bc_b in
-    Printf.printf "%d %d %d\n" !bc_r !bc_v !bc_b;
     set_color c; 
     clear_graph (); 
     fill_rect 0 0 (size_x()) (size_y());
     set_color white
 ;;
 
-
+(** [fc] applique l'option -fc.
+    Change la couleur de l'avant-plan si l'option est activé, remet la couleur par défaut (noir) sinon.
+*)
 let fc () =
   let basic = black in 
   if !is_fc then
@@ -63,17 +73,27 @@ let fc () =
   else 
     set_color basic
 ;;
-
+(** [pc] applique l'option -pc.
+    Change la couleur des points. 
+*)
 let pc () =
   if !is_pc then
     let c = rgb !pc_r !pc_v !pc_b in
     set_color c
 ;;
 
+(** [cr] applique l'option -cr. L'option -cr affiche les points si :
+    - l'option -abs n'est pas activé.
+    - l'option -ae n'est pas activé.
+      (Donc -cr est activé par défaut si aucune option n'est specifié)
+    - l'option -cr est activé et -abs ne l'est pas. 
+      Rattrape l'exception [Fin] et la renvoie pour qu'elle arrive dans [main].
+      @param i le i-éme point a affiché 
+*)
 let cr i () =
   try
     (*Sur-approx et points au même temps pas de sens*)
-    if (!is_abs = false && !is_ae = false ) || !is_cr = true then (
+    if (!is_abs = false && !is_ae = false ) || (!is_cr = true && !is_abs=false) then (
       Cr.run !det_prog i)
   with 
   | Cr.Fin -> raise Cr.Fin
