@@ -39,7 +39,10 @@ let () =
         while !i < 2000 do (
           (* Printf.printf "prog_length %d\n" prog_length ; *)
           Option.cr !i ();
+          Option.abs !j ();
+          Option.ae !i ();
           i := !i+1;
+          j := !j+1;
         )
         done 
       );
