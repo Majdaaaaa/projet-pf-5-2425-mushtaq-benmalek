@@ -45,7 +45,7 @@ let () =
     done
   with 
   | Quit -> close_graph ()
-  | Arg -> Printf.printf "Il faut un programme a éxécuté\n"; close_graph ()
+  | Arg -> Printf.printf "Il faut un programme à éxécuter\n"; close_graph ()
   | Not_in_rectangle -> Printf.printf "La coordonnée (0.0, 0.0) n'est pas dans le rectangle donnée.\n"
   | Abs_ae_exception -> Printf.printf "Les options -ae et -abs ne peuvent pas s'éxecuter en même temps.\n"
   | Rc_only -> Printf.printf "L'option -rc doit être utiliser avec l'option -abs ou -ae.\n"

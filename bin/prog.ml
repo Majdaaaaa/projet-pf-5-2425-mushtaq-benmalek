@@ -249,7 +249,7 @@ let prog1() =
 
 
 
-  let prog1() =
+  (* let prog1() =
   [
     Move(Translate{x = -1.0 ; y = 4.0});
     Repeat(2,[Move(Translate{x =  -1.0 ; y = 1.0})]);
@@ -275,38 +275,23 @@ let prog1() =
     
     Repeat(2,[Move(Translate{x = -1.0 ; y = -1.0})]);
 
-  ]
+  ] *)
 
+let prog1() = 
+    [
+      Either(
+        [Move(Translate{ x = 1.0 ; y = 1.0})],
+       [Move(Translate{ x = 2.0; y = 0.})]
+       ); 
 
-(* let rev_opp cmds = 
-  let rec aux cmds =
-    match cmds with 
-    | [] -> []
-    | a::w ->
-        match a with
-        | Move ( Translate {x = _ ; y = _ }) -> a :: aux w
-        | Move ( Rotate ({x = xx ; y = yy } , f) ) -> Move(Rotate ({x = xx ; y = yy },-.f))  :: aux w
-        | Repeat (i,c) -> Repeat(i, List.rev (aux c)) :: aux w
-        | Either (p,q) -> a:: aux p @ aux q
-  in List.rev (aux cmds) 
-;;
-
-let rec dragon size n = 
-  if n=0 then [Move(Translate{x = size; y = 0.0 })]
-  else
-    let size' = size /. sqrt 2. in
-    dragon size' (n-1) @
-    [Move(Rotate({x = 0.0 ; y = 0.0}, 90.0)) ] @ 
-    rev_opp (dragon size' (n-1))
-;;
-
-
-let prog1() =
-  dragon 5. 3
-;; *)
-
-
-
+      Either(
+        [Move(Rotate ({x = 0. ; y = 0. } , 90.0 ))],
+        [
+          Move(Rotate ({x = 0. ; y = 0. } , 30.0 ))
+          ]
+      )
+    ]
+  ;;
 
 (* let prog1() = *)
 
@@ -341,13 +326,13 @@ let prog1() =
    ;; *)
 
 (* PROGRAMME POUR LE EITHER *)
-let prog17 () =
+(* let prog1() =
   let mid_x = 0.0 in
   let mid_y = 0.0 in
   [
     Either ( [Move (Translate {x = mid_x +. 3.0; y = mid_y +. 3.0})] , [Move(Rotate ({x = mid_x ; y = mid_y} , 90.0 ))] );
 
-    Repeat(5, [Move(Translate {x = -. 2. ; y = mid_y })] );
+    (* Repeat(5, [Move(Translate {x = -. 2. ; y = mid_y })] ); *)
     (* Point dans le premier quadrant (x > 0, y > 0) *)
     Move (Translate {x = mid_x +. 5.0; y = mid_y +. 5.0});
 
@@ -360,7 +345,7 @@ let prog17 () =
     (* Retour au centre *)
     Move (Translate {x = -.mid_x; y = -.mid_y})
   ]
-;; 
+;;  *)
 
 let prog13() = [
   Repeat (9, [Move (Translate {x = 1. ;y=1.})]);
